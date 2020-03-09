@@ -2,7 +2,10 @@ pipeline {
     agent any
     stages {
         stage("Determine products and tests to run.") {
-            
+            steps {
+                sh "ls -al"
+            }
+
         }
     }
 }
