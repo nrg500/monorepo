@@ -29,7 +29,7 @@ pipeline {
                 script {
                     productsToBuild.each {
                         build = load("products/${it}/build.groovy")
-                        build.run()
+                        build.build()
                     }
                 }
             }
