@@ -10,8 +10,6 @@ pipeline {
                     def diff = sh(returnStdout: true, script: "git diff origin/master...")
                     print(diff)
                 }
-                
-
             }
         }
     }
