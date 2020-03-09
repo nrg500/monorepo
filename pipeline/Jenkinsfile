@@ -8,7 +8,8 @@ pipeline {
             steps {
                 script {
                     def diff = sh(returnStdout: true, script: "git diff origin/master... --name-only")
-                    print(diff)
+                    def containsJenkinsFile = (diff.trim() =~ /(?sm)pipeline\/(.*)/)
+                    print(containsJenkinsFile[0][1])
                 }
             }
         }
