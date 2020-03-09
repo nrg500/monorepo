@@ -10,7 +10,7 @@ pipeline {
                     def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
                     def diffs = diffResult.split('\n')
                     def productsRegex = /products\/(.*?)\/.*/
-                    def productsToBuild = []
+                    productsToBuild = []
                     diffs.each {
                         def product = it.trim() =~ productsRegex
                         if(product.matches()) {
@@ -21,6 +21,13 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+
+        stage("Build products")  {
+            productsToBuild.each {
+                build = load("/products/${it}/build.groovy")
+                build.run()
             }
         }
     }
