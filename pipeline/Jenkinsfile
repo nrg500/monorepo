@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    triggers {
+        pollSCM 'H/15 * * * *'
+    }
     stages {
         stage("Determine products and tests to run.") {
             steps {
