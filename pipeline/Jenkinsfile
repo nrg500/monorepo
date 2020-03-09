@@ -7,10 +7,18 @@ pipeline {
         stage("Determine products and tests to run.") {
             steps {
                 script {
-                    def diff = sh(returnStdout: true, script: "git diff origin/master... --name-only")
-                    def productsToBuild = (diff.trim() =~ /(?sm)products\/(.*)\/.*/)
-                    productsToBuild[0].unique(false).each {
-                        print ("Product found: ${it}")
+                    def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
+                    def diffs = diffResult.split('\n')
+                    def productsRegex = /products\/(.*?)\/.*/
+                    def productsToBuild = []
+                    diffs.each {
+                        def product = it.trim() =~ productsRegex
+                        if(product.matches()) {
+                            if(!productsToBuild.contains(product[0][1])) {
+                                productsToBuild.push(product[0][1])
+                                print("Found product ${product[0][1]}")
+                            }
+                        }
                     }
                 }
             }
