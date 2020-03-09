@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     productsToBuild.each {
-                        build = load("/products/${it}/build.groovy")
+                        build = load("products/${it}/build.groovy")
                         build.run()
                     }
                 }
