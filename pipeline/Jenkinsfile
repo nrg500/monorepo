@@ -8,8 +8,8 @@ pipeline {
             steps {
                 script {
                     def diff = sh(returnStdout: true, script: "git diff origin/master... --name-only")
-                    def productsToBuild = (diff.trim() =~ /(?sm)products\/(.*)/)
-                    productsToBuild[0].each {
+                    def productsToBuild = (diff.trim() =~ /(?sm)products\/(.*)\/.*/)
+                    productsToBuild[0].unique(false).each {
                         print ("Product found: ${it}")
                     }
                 }
