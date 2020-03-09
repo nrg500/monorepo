@@ -6,7 +6,12 @@ pipeline {
     stages {
         stage("Determine products and tests to run.") {
             steps {
-                sh "echo 'this branch contains changes'"
+                script {
+                    def diff = sh(returnStdout: true, script: "git diff origin/master...")
+                    print(diff)
+                }
+                
+
             }
         }
     }
