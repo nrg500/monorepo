@@ -25,9 +25,13 @@ pipeline {
         }
 
         stage("Build products")  {
-            productsToBuild.each {
-                build = load("/products/${it}/build.groovy")
-                build.run()
+            steps {
+                script {
+                    productsToBuild.each {
+                        build = load("/products/${it}/build.groovy")
+                        build.run()
+                    }
+                }
             }
         }
     }
