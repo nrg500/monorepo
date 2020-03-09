@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Determine products and tests to run.") {
             steps {
-                sh "ls -al"
+                sh "echo 'this branch contains changes'"
             }
         }
     }
