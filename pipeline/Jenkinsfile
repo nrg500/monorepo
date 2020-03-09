@@ -7,7 +7,7 @@ pipeline {
         stage("Determine products and tests to run.") {
             steps {
                 script {
-                    def diff = sh(returnStdout: true, script: "git diff origin/master...")
+                    def diff = sh(returnStdout: true, script: "git diff origin/master... --name-only")
                     print(diff)
                 }
             }
