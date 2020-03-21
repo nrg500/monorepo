@@ -15,3 +15,9 @@ The reason we want the closest common ancestor here is that we do not want the d
 We are only interested in which files were changed, not in the actual changes, so we add `--name-only` to get only the filenames.
 
 This gives us a list of filenames seperated by newlines. In order to find out which products the changes were made to, we use a regex with a capture group for the folder name (folder the product resides in). We filter out the duplicates as we may have made multiple changes to any one product.
+
+
+## Running the builds
+In order to run the product builds, we call on their specific `build.groovy` files in the product directories. The reason we want to always call these is to allow for customization in the build. The product is responsible for the way it is built and if any changes occur in the build of the product, it will trigger a rebuild of only that product due to the change being in the products' folder.
+
+We do want to allow for some sort of generic builds that we use frequently, so the product in turn can decide to call load a generic buildscript. Any time a generic build is changed we will have to run all the builds as we can not be sure which ones use them. (Theoretically we could, but the optimization here may not be worth the added complexity).
