@@ -1,5 +1,1 @@
-return { 
-    stage ("Building ${PRODUCT_NAME}") {
-        print("Hello from frontend!")
-    }
-}
+return load("pipeline/npm.groovy")
