@@ -1,28 +1,27 @@
 node {
-        stage("Determine products and tests to run.") {
-            def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
-            def diffs = diffResult.split('\n')
-            def productsRegex = /products\/(.*?)\/.*/
-            productsToBuild = []
-            diffs.each {
-                def product = it.trim() =~ productsRegex
-                if(product.matches()) {
-                    if(!productsToBuild.contains(product[0][1])) {
-                        productsToBuild.push(product[0][1])
-                        print("Found product ${product[0][1]}")
-                    }
+    stage("Determine products and tests to run.") {
+        def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
+        def diffs = diffResult.split('\n')
+        def productsRegex = /products\/(.*?)\/.*/
+        productsToBuild = []
+        diffs.each {
+            def product = it.trim() =~ productsRegex
+            if(product.matches()) {
+                if(!productsToBuild.contains(product[0][1])) {
+                    productsToBuild.push(product[0][1])
+                    print("Found product ${product[0][1]}")
                 }
             }
         }
+    }
 
-        stage("Build products")  {
-            def stageDefinitionMap = [:]
-            productsToBuild.each {
-                build = load("products/${it}/build.groovy")
-                build.getStageDefinition()
-                stageDefinitionMap.put(it, build)
-            }
-            parallel(stageDefinitionMap)
+    stage("Build products")  {
+        def stageDefinitionMap = [:]
+        productsToBuild.each {
+            build = load("products/${it}/build.groovy")
+            build.getStageDefinition()
+            stageDefinitionMap.put(it, build)
         }
+        parallel(stageDefinitionMap)
     }
 }
