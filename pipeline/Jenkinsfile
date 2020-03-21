@@ -1,5 +1,5 @@
+properties([pipelineTriggers([pollSCM 'H/15 * * * *'])])
 node {
-    properties([pipelineTriggers([pollSCM 'H/15 * * * *'])])
         stage("Determine products and tests to run.") {
             def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
             def diffs = diffResult.split('\n')
