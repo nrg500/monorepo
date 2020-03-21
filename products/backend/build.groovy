@@ -1,5 +1,5 @@
-def build() {
+def getStageDefinition() {
     def maven = load("pipeline/maven.groovy")
-    maven.build("backend")
+    return maven.build("backend")
 }
 return this
