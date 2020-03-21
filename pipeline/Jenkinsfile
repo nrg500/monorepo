@@ -1,4 +1,5 @@
 node {
+    checkout scm
     stage("Determine products and tests to run.") {
         def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
         def diffs = diffResult.split('\n')
