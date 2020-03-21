@@ -1,1 +1,1 @@
-return load("pipeline.maven.groovy")
+return load("pipeline/maven.groovy")
