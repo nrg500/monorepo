@@ -17,7 +17,7 @@ node {
     }
 
     stage("Prepare product stages")  {
-        def stageDefinitionMap = [:]
+        stageDefinitionMap = [:]
         productsToBuild.each {
             PRODUCT_NAME = it
             build = load("products/${it}/build.groovy")
