@@ -1,5 +1,7 @@
 def getStageDefinition() {
-    def maven = load("pipeline/maven.groovy")
-    return maven.build("backend")
+    return { stage ("printing hello butler") {
+        print("Hello Butler!")
+        }
+    }
 }
 return this
