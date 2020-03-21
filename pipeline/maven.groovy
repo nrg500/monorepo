@@ -1,8 +1,10 @@
-def apply() {
+def apply(buildDirectory) {
     return {
         stage("Building ${PRODUCT_NAME}") {
             docker.image('maven:3').inside() {
-                sh "mvn clean package"
+                dir(buildDirectory) {
+                    sh "mvn clean package"
+                }
             }
         }
     }

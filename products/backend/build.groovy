@@ -1,2 +1,2 @@
-def banana = load("pipeline/maven.groovy")
-return banana.apply()
+def buildStage = load("pipeline/maven.groovy")
+return buildStage.apply("products/backend")
