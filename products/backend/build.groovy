@@ -1,5 +1,1 @@
-return { stage ("printing hello butler") {
-    print("Hello Butler!")
-    sleep(30)
-    }
-}
+return load("pipeline.maven.groovy")

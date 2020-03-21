@@ -1,9 +1,6 @@
-def build(productName) {
-    return {
-        stage("Building ${productName}") {
-            //  agent { docker { image 'maven:3' } }
-            sh "ls -al"
-        }
+return {
+    stage("Building ${PRODUCT_NAME}") {
+        //  agent { docker { image 'maven:3' } }
+        print "Hello from maven!"
     }
 }
-return this

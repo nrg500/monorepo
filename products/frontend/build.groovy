@@ -1,5 +1,5 @@
-return { stage ("printing hello butler") {
-    print("Hello Butler!")
-    sleep(30)
+return { 
+    stage ("Building ${PRODUCT_NAME}") {
+        print("Hello from frontend!")
     }
 }
