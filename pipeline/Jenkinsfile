@@ -20,7 +20,6 @@ node {
         def stageDefinitionMap = [:]
         productsToBuild.each {
             build = load("products/${it}/build.groovy")
-            build.getStageDefinition()
             stageDefinitionMap.put(it, build)
         }
         parallel(stageDefinitionMap)
