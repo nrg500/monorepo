@@ -1,9 +1,11 @@
 # monorepo
 
-Run Jenkins:
+Run Jenkins (image with docker cli inside):
 
-`docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home --name jenkins jenkins/jenkins:lts`
+`docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home --name jenkins jenkinsci/blueocean`
 
+Workaround for macbook privileges, run jenkins as root.
+`docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --user root --name jenkins jenkinsci/blueocean`
 
 ## Determine products and tests to build
 In order to determine which products and tests to build we need to get an overview of the changed files.
