@@ -3,7 +3,7 @@ def apply(buildDirectory) {
         stage("Building ${PRODUCT_NAME}") {
             docker.image('maven:3').inside() {
                 dir(buildDirectory) {
-                    sh "mvn clean package"
+                    sh "mvn -B clean package"
                 }
             }
         }
