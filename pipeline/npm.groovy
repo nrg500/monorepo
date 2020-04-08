@@ -3,7 +3,7 @@ def apply(buildDirectory) {
         stage("Building ${PRODUCT_NAME}") {
             docker.image('node:13').inside() {
                 dir(buildDirectory) {
-                    sh "npm install"
+                    sh "npm install --dev"
                     sh "ng build --prod"
                 }
             }
