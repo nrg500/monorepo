@@ -1,5 +1,5 @@
-def build(product) {
-    def npmBuilder = load("pipeline/npm.groovy")
-    return npmBuilder.createStage(product)
+def build() {
+    def buildStage = load("pipeline/npm.groovy")
+    return buildStage.apply("products/frontend")
 }
 return this

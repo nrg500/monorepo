@@ -21,7 +21,7 @@ node {
         productsToBuild.each {
             PRODUCT_NAME = it
             builder = load("products/${it}/builder.groovy")
-            stageDefinitionMap.put(it, builder.build(it))
+            stageDefinitionMap.put(it, builder.build())
         }
     }
     parallel(stageDefinitionMap)
