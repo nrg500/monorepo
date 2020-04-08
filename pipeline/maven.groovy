@@ -1,8 +1,8 @@
-def apply(buildDirectory) {
+def createStage(product) {
     return {
-        stage("Building ${PRODUCT_NAME}") {
+        stage("Building ${product}") {
             docker.image('maven:3').inside() {
-                dir(buildDirectory) {
+                dir("/products/${product}") {
                     sh "mvn -q clean package"
                 }
             }
