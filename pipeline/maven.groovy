@@ -4,6 +4,7 @@ def apply(buildDirectory) {
             docker.image('maven:3').inside() {
                 dir(buildDirectory) {
                     sh "mvn -q clean package"
+                    sh "docker build -t ${PRODUCT_NAME} ."
                 }
             }
         }

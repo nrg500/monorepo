@@ -1,5 +1,5 @@
 def build() {
-    def buildStage = load("pipeline/npm.groovy")
+    def buildStage = load("pipeline/angular.groovy")
     return buildStage.apply("products/frontend")
 }
 return this
