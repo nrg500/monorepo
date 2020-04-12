@@ -1,12 +1,12 @@
-def apply(buildDirectory) {
+def apply(product) {
     return {
-        stage("Building ${PRODUCT_NAME}") {
+        stage("Building ${product}") {
             docker.image('node:13').inside() {
-                dir(buildDirectory) {
+                dir("products/${product}") {
                     sh "npm install"
                     sh "npm install -g @angular/cli@latest"
                     sh "ng build --prod --outputPath=build/dist"
-                    sh "docker build -t ${PRODUCT_NAME} build"
+                    sh "docker build -t ${product} build"
                 }
             }
         }

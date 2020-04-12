@@ -1,18 +1,17 @@
-def apply(buildDirectory) {
+def apply(product) {
     return {
-        stage("Building ${PRODUCT_NAME}") {
+        stage("Building product") {
             docker.image('maven:3').inside() {
-                dir(buildDirectory) {
-                    sh "mvn -q clean package"
-                    stash name:"${PRODUCT_NAME}", includes: "target"
-                    
+                dir("products/${product}") {
+                    sh "mvn -q clean package -DskipTests"
+                    stash name:"${product}", includes: "target"
                 }
             }
         }
         stage("Building docker image") {
-            dir(buildDirectory) {
-                unstash "${PRODUCT_NAME}"
-                sh "docker build -t ${PRODUCT_NAME} ."
+             dir("products/${product}") {
+                unstash "${product}"
+                sh "docker build -t ${product} ."
             }
         }
     }
