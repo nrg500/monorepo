@@ -4,14 +4,14 @@ def apply(buildDirectory) {
             docker.image('maven:3').inside() {
                 dir(buildDirectory) {
                     sh "mvn -q clean package"
-                    stash name:${PRODUCT_NAME}, includes: target
+                    stash name:"${PRODUCT_NAME}", includes: "target"
                     
                 }
             }
         }
         stage("Building docker image") {
             dir(buildDirectory) {
-                unstash target
+                unstash "${PRODUCT_NAME}"
                 sh "docker build -t ${PRODUCT_NAME} ."
             }
         }
