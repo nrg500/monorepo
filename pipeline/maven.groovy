@@ -9,15 +9,8 @@ def apply(product) {
             }
         }
         stage("Uploading as docker image") {
-            dir("products/${product}") {
-                def imageName = "berwoutv/${product}"
-                unstash "${product}"
-                dockerImage = docker.build(imageName)
-                docker.withRegistry('', 'dockerhub') {
-                    dockerImage.push()
-                }
-                sh "docker rmi ${imageName}"
-            }
+            dockerBuild = load('docker.groovy')
+            dockerBuild.buildAndUploadImage(product, 'berwoutv')
         }
     }
 }

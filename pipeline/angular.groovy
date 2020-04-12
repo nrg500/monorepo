@@ -10,11 +10,9 @@ def apply(product) {
                 }
             }
         }
-        stage("Building Docker image") {
-            dir("products/${product}") {
-                unstash "${product}"
-                sh "docker build -t ${product} build"
-            }
+        stage("Uploading as docker image") {
+            dockerBuild = load('docker.groovy')
+            dockerBuild.buildAndUploadImage(product, 'berwoutv')
         }
     }
 }
