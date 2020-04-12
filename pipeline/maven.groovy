@@ -9,8 +9,8 @@ def apply(product) {
             }
         }
         stage("Uploading as docker image") {
-            dockerBuild = load('docker.groovy')
-            dockerBuild.buildAndUploadImage(product, 'berwoutv')
+            def dockerBuild = load('pipeline/docker.groovy')
+            dockerBuild.buildAndUploadImage(product, 'berwoutv', '.')
         }
     }
 }
