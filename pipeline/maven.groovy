@@ -9,20 +9,14 @@ def apply(product) {
             }
         }
         stage("Uploading as docker image") {
-            def imageName = "berwoutv/${product}"
-            unstash "${product}"
             dir("products/${product}") {
-                stage("Building docker image") {
-                    def dockerImage = docker.build(imageName)
+                def imageName = "berwoutv/${product}"
+                unstash "${product}"
+                dockerImage = docker.build(imageName)
+                docker.withRegistry('', 'dockerhub') {
+                    dockerImage.push()
                 }
-                stage("Pushing docker image") {
-                    docker.withRegistry('', 'dockerhub') {
-                        dockerImage.push()
-                    }
-                }
-                stage("Cleanup") {
-                    sh "docker rmi ${imageName}"
-                }
+                sh "docker rmi ${imageName}"
             }
         }
     }
