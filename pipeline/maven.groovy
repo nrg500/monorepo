@@ -10,8 +10,13 @@ def apply(product) {
         }
         stage("Building docker image") {
              dir("products/${product}") {
+                def imageName = "berwoutv/${product}"
                 unstash "${product}"
-                sh "docker build -t ${product} ."
+                sh "docker build -t berwoutv/${product} ."
+                def dockerImage = docker.build(imageName)
+                docker.withRegistry('', 'dockerhub') {
+                    dockerImage.push()
+                }
             }
         }
     }
