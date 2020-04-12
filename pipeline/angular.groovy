@@ -6,8 +6,14 @@ def apply(product) {
                     sh "npm install"
                     sh "npm install -g @angular/cli@latest"
                     sh "ng build --prod --outputPath=build/dist"
-                    sh "docker build -t ${product} build"
+                    stash name: "${product}" includes: "build/*"
                 }
+            }
+        }
+        stage("Building Docker image") {
+            dir("products/${product}") {
+                unstash "${product}"
+                sh "docker build -t ${product} build"
             }
         }
     }

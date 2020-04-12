@@ -4,7 +4,7 @@ def apply(product) {
             docker.image('maven:3').inside() {
                 dir("products/${product}") {
                     sh "mvn -q clean package -DskipTests"
-                    stash name:"${product}", includes: "target"
+                    stash name:"${product}", includes: "target/*"
                 }
             }
         }
