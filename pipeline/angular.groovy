@@ -6,7 +6,7 @@ def apply(product) {
                     sh "npm install"
                     sh "npm install -g @angular/cli@latest"
                     sh "ng build --prod --outputPath=build/dist"
-                    stash name: "${product}" includes: "build/*"
+                    stash name: "${product}", includes: "build/*"
                 }
             }
         }
