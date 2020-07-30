@@ -7,6 +7,12 @@ Run Jenkins (image with docker cli inside):
 Workaround for macbook privileges, run jenkins as root.
 `docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --user root --name jenkins jenkinsci/blueocean`
 
+Install helm `brew install helm`
+Install kubectl `brew install kubectl`
+Install gcloud shell
+`gcloud init`
+`gcloud container clusters create cluster-1`
+
 ## Determine products and tests to build
 In order to determine which products and tests to build we need to get an overview of the changed files.
 
