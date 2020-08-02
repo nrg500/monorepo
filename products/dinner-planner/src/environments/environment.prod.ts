@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  mealsServiceUrl: 'http://localhost:5000'
+  mealsServiceUrl: '/api'
 };

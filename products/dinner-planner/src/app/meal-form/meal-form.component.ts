@@ -5,8 +5,6 @@ import { IngredientService } from './ingredient/ingredient.service';
 import {Meal} from './meal';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-meal-form',
@@ -16,6 +14,11 @@ import { catchError, retry } from 'rxjs/operators';
 export class MealFormComponent implements OnInit {
 
   units = ['gr', 'cl', 'ml', 'l', 'kg'];
+
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
 
   mealForm = new FormGroup({
     name : new FormControl(''),
@@ -45,9 +48,7 @@ export class MealFormComponent implements OnInit {
     if (mealName && ingredients.length > 0) {
       const meal = new Meal(mealName, ingredients);
       const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json'
-        })
+        headers: this.headers
       };
       this.http.post(environment.mealsServiceUrl + '/meals', meal, httpOptions)
         .subscribe(postedMeal => console.log(postedMeal), error => console.log(error));
