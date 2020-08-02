@@ -2,7 +2,7 @@
 
 Run Jenkins (image with docker cli inside):
 
-`docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home --name jenkins jenkinsci/blueocean`
+`docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock --name jenkins jenkinsci/blueocean`
 
 Workaround for macbook privileges, run jenkins as root.
 `docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --user root --name jenkins jenkinsci/blueocean`
