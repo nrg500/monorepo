@@ -27,6 +27,10 @@ app.add_middleware(
 app.add_event_handler("startup", connect_to_mongo)
 app.add_event_handler("shutdown", close_mongo_connection)
 
+@app.get("/api/meals/health")
+async def health():
+    return "Running"
+
 @app.get("/api/meals")
 async def meals(db: AsyncIOMotorClient = Depends(get_database)):
     meals : List[Meal] = []
