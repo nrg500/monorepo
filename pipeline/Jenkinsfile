@@ -1,4 +1,5 @@
 node {
+    dir("source") {
     checkout scm
     stage("Determine products and tests to run.") {
         def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
@@ -19,10 +20,21 @@ node {
     stage("Prepare product stages")  {
         stageDefinitionMap = [:]
         productsToBuild.each {
-            PRODUCT_NAME = it
             builder = load("products/${it}/builder.groovy")
             stageDefinitionMap.put(it, builder.build())
         }
     }
     parallel(stageDefinitionMap)
+    }
+
+    stage("Deploy") {
+        dir("deploy") {
+            git branch: 'master',
+                credentialsId: 'git',
+                url: 'https://github.com/nrg500/monorepo-deployments.git'
+            productsToBuild.each {
+                sh "kubectl apply -f ${it}/deployment.yaml"
+            }
+        }
+    }
 }
