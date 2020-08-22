@@ -1,34 +1,35 @@
 node {
+    deleteDir()
     dir("source") {
-    checkout scm
-    stage("Determine products and tests to run.") {
-        def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
-        def diffs = diffResult.split('\n')
-        def productsRegex = /products\/(.*?)\/.*/
-        productsToBuild = []
-        diffs.each {
-            def product = it.trim() =~ productsRegex
-            if(product.matches()) {
-                if(!productsToBuild.contains(product[0][1])) {
-                    productsToBuild.push(product[0][1])
-                    print("Found product ${product[0][1]}")
+        checkout scm
+        stage("Determine products and tests to run.") {
+            def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
+            def diffs = diffResult.split('\n')
+            def productsRegex = /products\/(.*?)\/.*/
+            productsToBuild = []
+            diffs.each {
+                def product = it.trim() =~ productsRegex
+                if(product.matches()) {
+                    if(!productsToBuild.contains(product[0][1])) {
+                        productsToBuild.push(product[0][1])
+                        print("Found product ${product[0][1]}")
+                    }
                 }
             }
         }
-    }
 
-    stage("Prepare product stages")  {
-        stageDefinitionMap = [:]
-        productsToBuild.each {
-            builder = load("products/${it}/builder.groovy")
-            stageDefinitionMap.put(it, builder.build())
+        stage("Prepare product stages")  {
+            stageDefinitionMap = [:]
+            productsToBuild.each {
+                builder = load("products/${it}/builder.groovy")
+                stageDefinitionMap.put(it, builder.build())
+            }
         }
-    }
-    parallel(stageDefinitionMap)
+        parallel(stageDefinitionMap)
     }
 
-    stage("Deploy") {
-        dir("deploy") {
+    dir("deploy") {
+        stage("Deploy to test") {
             git branch: 'master',
                 credentialsId: 'git',
                 url: 'https://github.com/nrg500/monorepo-deployments.git'
