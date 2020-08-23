@@ -28,23 +28,32 @@ node {
         }
 
         stage("Prepare product stages")  {
-            stageDefinitionMap = [:]
+            productStageDefinitionMap = [:]
             productsToBuild.each {
                 builder = load("products/${it}/builder.groovy")
-                stageDefinitionMap.put(it, builder.build())
+                productStageDefinitionMap.put(it, builder.build())
             }
         }
-        parallel(stageDefinitionMap)
+        parallel(productStageDefinitionMap)
     }
 
     dir("deploy") {
         stage("Deploy to test") {
             git branch: 'master',
-                credentialsId: 'git',
                 url: 'https://github.com/nrg500/monorepo-deployments.git'
             productsToBuild.each {
                 sh "kubectl apply -f ${it}/deployment.yaml"
             }
         }
+    }
+    dir("source") {
+        stage ("Prepare test stages") {
+            testStageDefinitionMap = [:]
+            testsToRun.each {
+                builder = load("products/${it}/builder.groovy")
+                testStageDefinitionMap.put(it, builder.build())
+            }
+        }
+        parallel(productStageDefinitionMap)
     }
 }

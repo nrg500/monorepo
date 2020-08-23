@@ -29,8 +29,11 @@ public class StepDefinitions{
 
         caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         driver = new RemoteWebDriver(URI.create("http://localhost:4444/").toURL(), caps);
-
-        driver.navigate().to("http://localhost:4200/addMeal");
+        String testUri = System.getProperty("TEST_URI");
+        if(testUri == null || testUri.isEmpty()) {
+            testUri = "http://localhost:4200";
+        };
+        driver.navigate().to(testUri + "/addMeal");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ingredient")));
     }
