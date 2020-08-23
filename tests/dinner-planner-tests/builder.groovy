@@ -1,6 +1,7 @@
 def build() {
     return {
         stage("Run selenium container") {
+            try {
             sh "docker network create selenium"
             sh "docker run -d -p 4444:4444 --network selenium --name selenium -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-alpha-6-20200730"
              docker.image('maven:3').inside("--network selenium") {
@@ -8,11 +9,13 @@ def build() {
                     sh "mvn -B -DargLine='-DTEST_URI=https://berwout.nl -DSELENIUM_URI=http://selenium:4444/' clean test"
                 }
              }
-        }
-        post {
-            always {
-                sh "docker network rm selenium"
-                sh "docker rm -f selenium"
+            } finally {
+                try {
+                    sh "docker network rm selenium"
+                }
+                try {
+                    sh "docker rm -f selenium"
+                }
             }
         }
     }
