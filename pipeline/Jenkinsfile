@@ -54,6 +54,6 @@ node {
                 testStageDefinitionMap.put(it, builder.build())
             }
         }
-        parallel(productStageDefinitionMap)
+        parallel(testStageDefinitionMap)
     }
 }
