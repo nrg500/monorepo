@@ -30,9 +30,9 @@ public class StepDefinitions{
         caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         String seleniumUri = System.getProperty("SELENIUM_URI");
         if(seleniumUri == null || seleniumUri.isEmpty()) {
-            seleniumUri = "http://localhost:4444/";
+            seleniumUri = "http://localhost:4444";
         };
-        driver = new RemoteWebDriver(URI.create("http://localhost:4444/").toURL(), caps);
+        driver = new RemoteWebDriver(URI.create(seleniumUri).toURL(), caps);
         String testUri = System.getProperty("TEST_URI");
         if(testUri == null || testUri.isEmpty()) {
             testUri = "http://localhost:4200";
