@@ -12,9 +12,13 @@ def build() {
             } finally {
                 try {
                     sh "docker network rm selenium"
+                } catch (Exception e) {
+
                 }
                 try {
                     sh "docker rm -f selenium"
+                } catch (Exception e) {
+
                 }
             }
         }
