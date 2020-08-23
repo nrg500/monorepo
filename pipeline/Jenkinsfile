@@ -6,13 +6,22 @@ node {
             def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
             def diffs = diffResult.split('\n')
             def productsRegex = /products\/(.*?)\/.*/
+            def testsRegex = /tests\/(.*?)\/.*/
             productsToBuild = []
+            testsToRun = []
             diffs.each {
                 def product = it.trim() =~ productsRegex
                 if(product.matches()) {
                     if(!productsToBuild.contains(product[0][1])) {
                         productsToBuild.push(product[0][1])
                         print("Found product ${product[0][1]}")
+                    }
+                }
+                def test = it.trim() =~ testsRegex
+                if(test.matches()) {
+                    if(!testsToRun.contains(test[0][1])) {
+                        testsToRun.push(test[0][1])
+                        print("Found test ${test[0][1]}")
                     }
                 }
             }
