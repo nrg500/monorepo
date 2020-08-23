@@ -8,6 +8,8 @@ def build() {
                     sh "mvn -DargLine='-DTEST_URI=https://berwout.nl' clean install"
                 }
              }
+            sh "docker network rm selenium"
+            sh "docker rm -f selenium"
         }
     }
 }
