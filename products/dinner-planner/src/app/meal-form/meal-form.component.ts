@@ -13,7 +13,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class MealFormComponent implements OnInit {
 
-  units = ['gr', 'cl', 'ml', 'l', 'kg'];
+  units = ['gr', 'pc', 'cl', 'ml', 'l', 'kg'];
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -26,14 +26,30 @@ export class MealFormComponent implements OnInit {
       this.createRow(),
       this.createRow(),
       this.createRow(),
-      this.createRow(),
       this.createRow()
     ])
   });
 
+  ingredients = [];
+
   constructor(private ingredientService: IngredientService, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.ingredientService.getIngredients().subscribe(resp => {
+      this.ingredients = resp.body
+    });
+  }
+
+  resetMealForm(): void {
+    this.mealForm = new FormGroup({
+      name : new FormControl(''),
+      ingredients: new FormArray([
+        this.createRow(),
+        this.createRow(),
+        this.createRow(),
+        this.createRow()
+      ])
+    });
   }
 
   onSubmit(): void {
@@ -50,17 +66,13 @@ export class MealFormComponent implements OnInit {
       const httpOptions = {
         headers: this.headers
       };
-      this.http.post(environment.mealsServiceUrl + '/meals', meal, httpOptions)
-        .subscribe(postedMeal => console.log(postedMeal), error => console.log(error));
+      this.http.post(environment.mealsServiceUrl, meal, httpOptions)
+        .subscribe(postedMeal => { console.log(postedMeal); this.resetMealForm(); }, error => console.log(error));
     }
   }
 
   get ingredientsFormArray(): FormArray {
     return this.mealForm.get('ingredients') as FormArray;
-  }
-
-  get ingredients(): Ingredient[] {
-    return this.ingredientService.getIngredients();
   }
 
   addRow(): void {
@@ -77,5 +89,23 @@ export class MealFormComponent implements OnInit {
       amount: new FormControl(''),
       unit: new FormControl('gr')
     });
+  }
+
+  putIngredientInForm(ingredient: Ingredient) : void {
+    const ingredientFormArray : FormArray = this.mealForm.get('ingredients') as FormArray
+    let foundPristineGroup = false;
+    let firstGroup = this.createRow();
+    for(let ingredientFormGroup of ingredientFormArray.controls) {
+      if(ingredientFormGroup.pristine) {
+        firstGroup = ingredientFormGroup as FormGroup;
+        foundPristineGroup = true;
+        break;
+      }
+    }
+    if(!foundPristineGroup) {
+      ingredientFormArray.controls.push(firstGroup);
+    }
+    firstGroup.markAsDirty();
+    firstGroup.setValue(ingredient);
   }
 }

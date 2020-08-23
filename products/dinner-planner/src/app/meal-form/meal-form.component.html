@@ -1,6 +1,6 @@
 <form [formGroup]="mealForm" class="container-fluid" (ngSubmit)="onSubmit()">
     <div class="row justify-content-center">
-        <h1 class="col-md-auto">Assemble your meal:</h1>
+        <h1 class="col-md-auto">Create your meal:</h1>
     </div>
     <div class="form-group row justify-content-center">
         <label for="mealNameInput" class="col-md-auto col-form-label">Meal name:</label>
@@ -8,9 +8,10 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
+            <h2 class="text-center">Catalog:</h2>
             <div class="row">
-                <div *ngFor="let ingredient of ingredients;" class="card col-sm-4">
-                    <img class="card-img-top" [src]="ingredient.url" alt="product image">
+                <div *ngFor="let ingredient of ingredients;" class="card col-sm-4 ingredient" (click)="putIngredientInForm(ingredient)">
+                    <!-- <img class="card-img-top" [src]="ingredient.url" alt="product image"> -->
                     <div class="card-body">
                         <h5 class="card-title">{{ ingredient.name }}</h5>
                         <p class="card-text">{{ingredient.amount}} {{ ingredient.unit }}</p>
@@ -19,7 +20,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <h2>Ingredients:</h2>
+            <h2 class="text-center">Ingredients:</h2>
             <table class="table" aria-describedby="ingredients input table">
                 <thead>
                     <tr>
@@ -36,10 +37,10 @@
                             #{{i+1}}
                         </td>
                         <td>
-                            <input type="text" class="form-control" formControlName="name">
+                            <input type="text" class="form-control" id="ingredient-name-{{i}}" formControlName="name">
                         </td>
                         <td>
-                            <input type="text" class="form-control" formControlName="amount">
+                            <input type="text" class="form-control" id="ingredient-amount-{{i}}" formControlName="amount">
                         </td>
                         <td>
                             <app-dropdown-selector formControlName="unit" [options]="units"></app-dropdown-selector>
@@ -55,7 +56,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="submit" class="float-right btn btn-primary" [disabled]="!mealForm.valid">Submit</button>
+            <button type="submit" class="float-right btn btn-primary submit-button" [disabled]="!mealForm.valid">Submit</button>
         </div>
     </div>
 </form>

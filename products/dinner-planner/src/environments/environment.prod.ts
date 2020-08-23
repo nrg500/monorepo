@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  mealsServiceUrl: '/api'
+  mealsServiceUrl: '/api/meals',
+  ingredientsServiceUrl: '/api/ingredients'
 };

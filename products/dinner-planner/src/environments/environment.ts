@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  mealsServiceUrl: 'http://localhost:5000'
+  ingredientsServiceUrl: 'http://localhost:8000/api/ingredients',
+  mealsServiceUrl: 'http://localhost:8001/api/meals'
 };
 
 /*

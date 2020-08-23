@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from './ingredient';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { JsonPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IngredientService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getIngredients() : Ingredient[] {
-    return [
-      new Ingredient('Aardappelen', 500, 'gr', '../../assets/ingredients/potatoes.jpg'),
-      new Ingredient('Aardappelen', 1, 'kg', '../../assets/ingredients/potatoes.jpg'),
-      new Ingredient('Aardappelen', 2, 'kg', '../../assets/ingredients/potatoes.jpg'),
-      new Ingredient('Appels', 500, 'gr', '../../assets/ingredients/apples.jpg'),
-      new Ingredient('Sperziebonen', 400, 'gr', '../../assets/ingredients/green-beans.jpg'),
-      new Ingredient('Sperziebonen', 800, 'gr', '../../assets/ingredients/green-beans.jpg'),
-      new Ingredient('Peren', 500, 'gr', '../../assets/ingredients/pears.jpg')
-    ]
+  getIngredients() : Observable<HttpResponse<Ingredient[]>> {
+    return this.http.get<Ingredient[]>(environment.ingredientsServiceUrl, { observe: 'response' });
   }
 }
