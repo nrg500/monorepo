@@ -50,7 +50,7 @@ node {
         stage ("Prepare test stages") {
             testStageDefinitionMap = [:]
             testsToRun.each {
-                builder = load("products/${it}/builder.groovy")
+                builder = load("tests/${it}/builder.groovy")
                 testStageDefinitionMap.put(it, builder.build())
             }
         }
