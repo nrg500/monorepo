@@ -28,6 +28,10 @@ public class StepDefinitions{
         caps.setCapability(CapabilityType.BROWSER_NAME,"chrome");
 
         caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        String seleniumUri = System.getProperty("SELENIUM_URI");
+        if(seleniumUri == null || seleniumUri.isEmpty()) {
+            seleniumUri = "http://localhost:4444/";
+        };
         driver = new RemoteWebDriver(URI.create("http://localhost:4444/").toURL(), caps);
         String testUri = System.getProperty("TEST_URI");
         if(testUri == null || testUri.isEmpty()) {
