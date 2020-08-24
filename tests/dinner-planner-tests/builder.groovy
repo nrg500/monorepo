@@ -3,7 +3,7 @@ def build() {
         stage("Run selenium container") {
             try {
                 try{ 
-                    sh '''
+                    sh '''#!/bin/bash +e
                     docker rm -f selenium
                     docker network rm selenium
                     kubectl delete job mongo-setup
@@ -19,7 +19,7 @@ def build() {
                 }
             } finally {
                 try{ 
-                    sh '''
+                    sh '''#!/bin/bash +e
                     docker rm -f selenium
                     docker network rm selenium
                     '''
