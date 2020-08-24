@@ -7,24 +7,27 @@ node {
             def diffs = diffResult.split('\n')
             def productsRegex = /products\/(.*?)\/.*/
             def testsRegex = /tests\/(.*?)\/.*/
-            productsToBuild = []
-            testsToRun = []
+            productsToBuild = [] as Set
+            testsToRun = [] as Set
             diffs.each {
                 def product = it.trim() =~ productsRegex
                 if(product.matches()) {
-                    if(!productsToBuild.contains(product[0][1])) {
-                        productsToBuild.push(product[0][1])
-                        print("Found product ${product[0][1]}")
-                    }
+                    productsToBuild.add(product[0][1])
                 }
                 def test = it.trim() =~ testsRegex
                 if(test.matches()) {
-                    if(!testsToRun.contains(test[0][1])) {
-                        testsToRun.push(test[0][1])
-                        print("Found test ${test[0][1]}")
-                    }
+                    testsToRun.add(test[0][1])
                 }
             }
+            print("products to build: " + productsToBuild)
+            print("tests to run: " + testsToRun)
+            def productsToDeploy = [] as Set
+            testsToRun.each {
+                def monoRepoJson = readJSON file: 'tests/' + it + '/monorepo.json'
+                productsToDeploy.plus(monoRepoJson.requiredProducts)
+            }
+            productsToDeploy.plus(productsToBuild)
+            print("to deploy: " + productsToDeploy)
         }
 
         stage("Prepare product stages")  {
