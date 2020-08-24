@@ -22,7 +22,7 @@ node {
             print("products to build: " + productsToBuild)
             print("tests to run: " + testsToRun)
 
-            def productsToDeploy = [] as Set<String>
+            productsToDeploy = [] as Set<String>
             testsToRun.each {
                 def monoRepoJson = readJSON file: 'tests/' + it + '/monorepo.json'
                 productsToDeploy = productsToDeploy + monoRepoJson.requiredProducts
