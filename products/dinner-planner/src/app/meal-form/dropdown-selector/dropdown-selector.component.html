@@ -1,0 +1,7 @@
+<div ngbDropdown class="d-inline-block">
+    <button type="button" class="btn btn-light"
+        ngbDropdownToggle>{{selectedOption}}</button>
+    <div ngbDropdownMenu>
+        <button type="button" *ngFor="let option of options" (click)="writeValue(option)" ngbDropdownItem>{{option}}</button>
+    </div>
+</div>

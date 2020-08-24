@@ -1,14 +1,64 @@
-pipeline {
-    agent any
-    triggers {
-        pollSCM 'H/15 * * * *'
-    }
-    stages {
+node {
+    deleteDir()
+    dir("source") {
+        checkout scm
         stage("Determine products and tests to run.") {
-            steps {
-                sh "ls -al"
-                sh "test making some changes."
+            def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
+            def diffs = diffResult.split('\n')
+            def productsRegex = /products\/(.*?)\/.*/
+            def testsRegex = /tests\/(.*?)\/.*/
+            productsToBuild = [] as Set
+            testsToRun = [] as Set
+            diffs.each {
+                def product = it.trim() =~ productsRegex
+                if(product.matches()) {
+                    productsToBuild.add(product[0][1])
+                }
+                def test = it.trim() =~ testsRegex
+                if(test.matches()) {
+                    testsToRun.add(test[0][1])
+                }
+            }
+            print("products to build: " + productsToBuild)
+            print("tests to run: " + testsToRun)
+
+            productsToDeploy = [] as Set<String>
+            testsToRun.each {
+                def monoRepoJson = readJSON file: 'tests/' + it + '/monorepo.json'
+                productsToDeploy = productsToDeploy + monoRepoJson.requiredProducts
+            }
+
+            productsToDeploy = productsToDeploy + productsToBuild
+            print("products to deploy: " + productsToDeploy)
+        }
+
+        stage("Prepare product stages")  {
+            productStageDefinitionMap = [:]
+            productsToBuild.each {
+                builder = load("products/${it}/builder.groovy")
+                productStageDefinitionMap.put(it, builder.build())
             }
         }
+        parallel(productStageDefinitionMap)
+    }
+
+    dir("deploy") {
+        stage("Deploy to test") {
+            git branch: 'master',
+                url: 'https://github.com/nrg500/monorepo-deployments.git'
+            productsToDeploy.each {
+                sh "kubectl apply -f ${it}/deployment.yaml"
+            }
+        }
+    }
+    dir("source") {
+        stage ("Prepare test stages") {
+            testStageDefinitionMap = [:]
+            testsToRun.each {
+                builder = load("tests/${it}/builder.groovy")
+                testStageDefinitionMap.put(it, builder.build())
+            }
+        }
+        parallel(testStageDefinitionMap)
     }
 }

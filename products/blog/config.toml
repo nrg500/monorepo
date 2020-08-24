@@ -1,0 +1,40 @@
+baseUrl = "http://berwout.nl"
+languageCode = "en-gb"
+title = "Berwout"
+copyright = "Copyright © 2020, Berwout de Vries Robles; all rights reserved."
+theme = "npq-hugo"
+themesdir = ""
+pygmentsUseClasses=true
+
+[params]
+  author = "Berwout de Vries Robles"
+  description = "Software Engineer"
+  keywords = "software engineering"
+  useAvatar = true
+  microBlogSection = "posts"
+  displayMicroBlog = false
+  displayRecent = true
+  recentMax = 3
+  mail = "bwdevr@gmail.com"
+
+[menu]
+  [[menu.main]]
+    name = "home"
+    pre = "<i class=\"fas fa-home fa-sm\"></i>"
+    url = "/"
+    weight = -9 
+  [[menu.main]]
+    name = "blog"
+    pre = "<i class=\"fas fa-keyboard fa-ms\"></i>"
+    url = "/blog/"
+    weight = -8
+  [[menu.main]]
+    name = "tags"
+    pre = "<i class=\"fas fa-tags fa-ms\"></i>"
+    url = "/tags/"
+    weight = -7 
+  [[menu.main]]
+    name = "github"
+    pre = "<i class=\"fab fa-github fa-ms\"></i>"
+    url = "https://github.com/nrg500"
+    weight = -6 
