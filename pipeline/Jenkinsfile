@@ -9,6 +9,11 @@ node {
             def testsRegex = /tests\/(.*?)\/.*/
             productsToBuild = [] as Set
             testsToRun = [] as Set
+            def availableTests = sh (
+                script: 'find tests/ -maxdepth 1 -type d | sed -r "s|tests/||"',
+                returnStdout: true
+            ).split('\n')
+
             diffs.each {
                 def product = it.trim() =~ productsRegex
                 if(product.matches()) {
@@ -20,6 +25,18 @@ node {
                 }
             }
             print("products to build: " + productsToBuild)
+
+            for(String availableTest : availableTests) {
+                for(String productToBuild : productsToBuild) {
+                    if(availableTest) {
+                        def monoRepoJson = readJSON file: 'tests/' + availableTest + '/monorepo.json'
+                        if(monoRepoJson.requiredProducts.contains(productToBuild)) {
+                            testsToRun.add(availableTest)
+                        }
+                    }
+                }
+            }
+            
             print("tests to run: " + testsToRun)
 
             productsToDeploy = [] as Set<String>
