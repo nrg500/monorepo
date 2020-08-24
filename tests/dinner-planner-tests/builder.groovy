@@ -2,11 +2,13 @@ def build() {
     return {
         stage("Run selenium container") {
             try {
-                try {
-                    sh "docker rm -f selenium"
-                } catch (Exception e) {}
-                try {
-                    sh "docker network rm selenium"
+                try{ 
+                    sh """#!bin/bash +e
+                    docker rm -f selenium
+                    docker network rm selenium
+                    kubectl delete job mongo-setup
+                    kubectl apply -f ../monorepo-deployments/mongo-setup
+                    """
                 } catch (Exception e) {}
                 sh "docker network create selenium"
                 sh "docker run -d -p 4444:4444 --network selenium --name selenium -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-alpha-6-20200730"
@@ -16,11 +18,11 @@ def build() {
                     }
                 }
             } finally {
-                try {
-                    sh "docker rm -f selenium"
-                } catch (Exception e) {}
-                try {
-                    sh "docker network rm selenium"
+                try{ 
+                    sh """#!bin/bash +e
+                    docker rm -f selenium
+                    docker network rm selenium
+                    """
                 } catch (Exception e) {}
             }
         }
