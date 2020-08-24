@@ -21,13 +21,15 @@ node {
             }
             print("products to build: " + productsToBuild)
             print("tests to run: " + testsToRun)
-            def productsToDeploy = [] as Set
+
+            def productsToDeploy = [] as Set<String>
             testsToRun.each {
                 def monoRepoJson = readJSON file: 'tests/' + it + '/monorepo.json'
-                productsToDeploy.plus(monoRepoJson.requiredProducts)
+                productsToDeploy = productsToDeploy + monoRepoJson.requiredProducts
             }
-            productsToDeploy.plus(productsToBuild)
-            print("to deploy: " + productsToDeploy)
+
+            productsToDeploy = productsToDeploy + productsToBuild
+            print("products to deploy: " + productsToDeploy)
         }
 
         stage("Prepare product stages")  {
@@ -44,7 +46,7 @@ node {
         stage("Deploy to test") {
             git branch: 'master',
                 url: 'https://github.com/nrg500/monorepo-deployments.git'
-            productsToBuild.each {
+            productsToDeploy.each {
                 sh "kubectl apply -f ${it}/deployment.yaml"
             }
         }
