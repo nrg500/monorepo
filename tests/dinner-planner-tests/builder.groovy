@@ -7,7 +7,7 @@ def build() {
                     docker rm -f selenium
                     docker network rm selenium
                     kubectl delete job mongo-setup
-                    kubectl apply -f ../monorepo-deployments/mongo-setup
+                    kubectl apply -f ../deploy/mongo-setup
                     docker network create selenium
                     docker run -d -p 4444:4444 --network selenium --name selenium -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-alpha-6-20200730
                     '''
