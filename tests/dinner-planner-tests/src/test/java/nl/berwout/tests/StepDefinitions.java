@@ -23,6 +23,7 @@ public class StepDefinitions{
     @Given("We are on the add meals form")
     public void weAreOnTheAddMealsForm() throws MalformedURLException {
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("ignore-certificate-errors");
         chromeOptions.setHeadless(true);
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(CapabilityType.BROWSER_NAME,"chrome");
