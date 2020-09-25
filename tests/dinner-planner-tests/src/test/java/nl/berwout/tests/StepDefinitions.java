@@ -46,10 +46,10 @@ public class StepDefinitions{
     @When("I add ingredients by clicking and writing")
     public void iAddIngredientsByClickingAndWriting() {
         driver.findElement(By.id("mealNameInput")).sendKeys("Super awesome meal");
-        driver.findElement(By.xpath("//*[text()='Verse geitenkaas']")).click();
-        driver.findElement(By.id("ingredient-name-1")).sendKeys("Sperziebonen");
+        driver.findElement(By.xpath("//*[text()='Radishes']")).click();
+        driver.findElement(By.id("ingredient-name-1")).sendKeys("Green beans");
         driver.findElement(By.id("ingredient-amount-1")).sendKeys("500");
-        driver.findElement(By.xpath("//*[text()='Geraspte jonge kaas']")).click();
+        driver.findElement(By.xpath("//*[text()='Cucumber']")).click();
     }
 
     @And("I submit the form")
