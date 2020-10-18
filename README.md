@@ -1,17 +1,24 @@
-# monorepo
+# Monorepo
+Welcome to this monorepo example.
 
-Run Jenkins (image with docker cli inside):
+## Prerequisites
+* A kubernetes cluster with kubectl access. (Can just be local from your Docker installation).
+* Optionally: A Jenkins installation with Docker in docker and kubectl. (I've included an example in the repo)
 
-`docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock --name jenkins jenkinsci/blueocean`
+## To run
+1. Run the jenkins example in the repo (`kubectl apply -f deployment.yaml`)
+1. Setup Jenkins following the default installation. (retrieve admin password from the logs, make a default account and install the recommended plugins)
+1. Install the Pipeline Utility Steps plugin in Jenkins (Manage Jenkins -> Manage Plugins -> Available Plugins, used for reading Json files in pipeline.)
+1. Add a credential for Docker Hub with id `dockerhub` to the jenkins credential store (Used for pushing images)
+1. Create a Jenkins Job that has the monorepo `https://github.com/nrg500/monorepo` as git source (or your own fork).
+1. Hit run!
 
-Workaround for macbook privileges, run jenkins as root.
-`docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --user root --name jenkins jenkinsci/blueocean`
+## Nota bene:
+The deployment repo `https://github.com/nrg500/monorepo-deployments` contains all the deployments, but the image names are still pointed towards my personal Docker Hub, the DNS record in the deployments is also pointed at my own DNS, so if you want to be able to run the full example, you will need to change these.
 
-Install helm `brew install helm`
-Install kubectl `brew install kubectl`
-Install gcloud shell
-`gcloud init`
-`gcloud container clusters create cluster-1`
+The Jenkins that is included in this repo is just a quick example for you to get up and running as fast as possible. It is not something I would ever advise you to deploy on production as it has too many privileges on the cluster and for Docker in Docker functionality. There are more production ready solutions available all over the internet, but they require a bit more setup. If you already have your own Jenkins with kubectl and Docker in Docker I would use that.
+
+# How the pipeline works
 
 ## Determine products and tests to build
 In order to determine which products and tests to build we need to get an overview of the changed files.
