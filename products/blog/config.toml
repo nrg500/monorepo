@@ -1,7 +1,7 @@
-baseUrl = "https://blog.berwout.nl"
+baseUrl = "https://berwout.nl"
 languageCode = "en-gb"
 title = "Berwout"
-copyright = "Copyright © 2020, Berwout de Vries Robles; all rights reserved."
+copyright = "Copyright © 2021, Berwout de Vries Robles; all rights reserved."
 theme = "npq-hugo"
 themesdir = ""
 pygmentsUseClasses=true

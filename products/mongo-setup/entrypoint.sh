@@ -1,4 +1,4 @@
-until mongo --host mongo --eval "print(\"waited for connection\")"
+until mongo --host "mongodb://mongo.svc.svc.cluster.local:27017" --eval "print(\"waited for connection\")"
 do
     sleep 1
 done
@@ -6,5 +6,5 @@ done
 // you can add more MongoDB waits here
 
 echo "Setting up ingredients."
-mongo mongodb://mongo:27017 < /mongo-setup.js
+mongo "mongodb://mongo.svc.svc.cluster.local:27017" "/mongo-setup.js"
 echo "Setup done."
