@@ -99,7 +99,7 @@ node {
         }
         stage("update environment repo"){
                 sh """#/bin/bash +e
-                git add namespaces/$BRANCH_NAME
+                git add .
                 git status | grep modified
                 if [ \$? -eq 0 ]
                 then
