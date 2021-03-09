@@ -103,7 +103,7 @@ node {
             git pull --rebase
             git add namespaces/$BRANCH_NAME
             git status | grep modified
-            if [ \\$? -eq 0 ]
+            if [ \$? -eq 0 ]
             then
                 set -e
                 git commit -am "Updated $BRANCH_NAME namespace for build $BUILD_NUMBER"
