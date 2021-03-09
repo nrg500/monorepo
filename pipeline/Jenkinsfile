@@ -60,12 +60,62 @@ node {
     }
 
     dir("deploy") {
-        stage("Deploy to test") {
-            git branch: 'master',
-                url: 'https://github.com/nrg500/monorepo-deployments.git'
-            productsToDeploy.each {
-                sh "kubectl apply -f ${it}/deployment.yaml"
+        stage("Create namespace") {
+            git branch: 'main', url: 'https://github.com/nrg500/cluster.git', credentialsId: 'github'
+            if(BRANCH_NAME && BRANCH_NAME != "main") {
+                sh "rm -r namespaces/${BRANCH_NAME} || true"
+                sh "mkdir namespaces/${BRANCH_NAME}"
+
+                def namespace = [
+                    "apiVersion": "v1",
+                    "kind": "Namespace",
+                    "metadata": [
+                        "name": "${BRANCH_NAME}"
+                    ]
+                ]
+                writeYaml file: "namespaces/${BRANCH_NAME}/namespace.yaml", data: namespace
+            
+                def kustomization = [
+                    "apiVersion": "kustomize.config.k8s.io/v1beta1",
+                    "kind": "Kustomization",
+                    "namespace": "${BRANCH_NAME}",
+                    "resources": ["namespace.yaml"],
+                    "bases": []
+                ]
+                productsToDeploy.each {
+                    sh "cp namespaces/main/${it}-ingress.yaml namespaces/${BRANCH_NAME}/"
+                    kustomization.resources.add("${it}-ingress.yaml");
+                    sh """sed -i -E 's/`(.*).berwout.nl`/`${BRANCH_NAME}-\\1.berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
+                    sh """sed -i -E 's/`www.berwout.nl`/`www.${BRANCH_NAME}-berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
+                    kustomization.bases.add("../../services/${it}")
+                }
+                writeYaml file: "namespaces/${BRANCH_NAME}/kustomization.yaml", data: kustomization
+
+                def clusterYaml = readYaml file: "kustomization.yaml"
+                if(!clusterYaml.bases.contains("namespaces/${BRANCH_NAME}")) {
+                    clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
+                }
+                writeYaml file: kustomization.yaml, data: clusterYaml
             }
+        }
+        stage("update environment repo"){
+            sh """#/bin/bash +e
+            git pull --rebase
+            git add namespaces/${BRANCH_NAME}
+            git status | grep modified
+            if [ $? -eq 0 ]
+            then
+                set -e
+                git commit -am "Updated ${BRANCH_NAME} namespace for build ${BUILD_NUMBER}"
+                git push
+            else
+                set -e
+                echo "No changes since last run"
+            fi
+            """
+        }
+        stage("Run deployment") {
+            build "../deploy"
         }
     }
     dir("source") {
