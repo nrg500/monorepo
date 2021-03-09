@@ -93,7 +93,8 @@ node {
                 writeYaml file: "namespaces/${BRANCH_NAME}/kustomization.yaml", data: kustomization, overwrite: true
 
                 def clusterYaml = readYaml file: "kustomization.yaml"
-                if(!clusterYaml.bases.contains("namespaces/${BRANCH_NAME}")) {
+                if(!("namespaces/${BRANCH_NAME}" in clusterYaml.bases)) {
+                    print clusterYaml.bases
                     clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
                 }
                 writeYaml file: "kustomization.yaml", data: clusterYaml, overwrite: true
