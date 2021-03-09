@@ -95,7 +95,7 @@ node {
                 if(!clusterYaml.bases.contains("namespaces/${BRANCH_NAME}")) {
                     clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
                 }
-                writeYaml file: kustomization.yaml, data: clusterYaml
+                writeYaml file: "kustomization.yaml", data: clusterYaml
             }
         }
         stage("update environment repo"){
