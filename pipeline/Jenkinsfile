@@ -96,8 +96,7 @@ node {
                 if(!("namespaces/${BRANCH_NAME}" in clusterYaml.bases)) {
                     print "namespaces/${BRANCH_NAME}" in clusterYaml.bases
                     print clusterYaml.bases.contains("namespaces/${BRANCH_NAME}")
-                    print clusterYaml.bases.containsKey("namespaces/${BRANCH_NAME}")
-                    print clusterYaml.bases.containsValue("namespaces/${BRANCH_NAME}")
+                    print clusterYaml.find(e -> e.equalsIgnoreCase("namespaces/${BRANCH_NAME}"))
                     print clusterYaml.bases
                     clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
                 }
