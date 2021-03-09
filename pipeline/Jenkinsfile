@@ -107,7 +107,7 @@ node {
                 git config --global user.email "jenkins@berwout.nl"
                 git config --global user.name "Jenkins"
                 git commit -am "Updated $BRANCH_NAME namespace for build $BUILD_NUMBER"
-                git push -u origin head
+                git push -u origin main
             else
                 set -e
                 echo "No changes since last run"
