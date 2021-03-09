@@ -104,6 +104,8 @@ node {
             if [ \$? -eq 0 ]
             then
                 set -e
+                  git config --global user.email "jenkins@berwout.nl"
+                git config --global user.name "Jenkins"
                 git commit -am "Updated $BRANCH_NAME namespace for build $BUILD_NUMBER"
                 git pull --rebase
                 git push
