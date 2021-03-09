@@ -93,11 +93,8 @@ node {
                 writeYaml file: "namespaces/${BRANCH_NAME}/kustomization.yaml", data: kustomization, overwrite: true
 
                 def clusterYaml = readYaml file: "kustomization.yaml"
-                if(!("namespaces/${BRANCH_NAME}" in clusterYaml.bases)) {
-                    print "namespaces/${BRANCH_NAME}" in clusterYaml.bases
-                    print clusterYaml.bases.contains("namespaces/${BRANCH_NAME}")
-                    print clusterYaml.bases.find{e -> e.toString().equalsIgnoreCase("namespaces/${BRANCH_NAME}")}
-                    print clusterYaml.bases
+                // Necessary because readYaml doesnt return a string, but a gstringimpl which does not work with contains / equals
+                if(!(clusterYaml.bases.find{e -> e.toString().equalsIgnoreCase("namespaces/${BRANCH_NAME}")}) {
                     clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
                 }
                 writeYaml file: "kustomization.yaml", data: clusterYaml, overwrite: true
