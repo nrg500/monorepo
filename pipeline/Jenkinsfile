@@ -63,8 +63,8 @@ node {
         stage("Create namespace") {
             git branch: 'main', url: 'https://github.com/nrg500/cluster.git', credentialsId: 'github'
             if(BRANCH_NAME && BRANCH_NAME != "main") {
-                sh "rm -r namespaces/${BRANCH_NAME} || true"
-                sh "mkdir namespaces/${BRANCH_NAME}"
+                sh "rm -r namespaces/$BRANCH_NAME || true"
+                sh "mkdir namespaces/$BRANCH_NAME"
 
                 def namespace = [
                     "apiVersion": "v1",
@@ -101,12 +101,12 @@ node {
         stage("update environment repo"){
             sh """#/bin/bash +e
             git pull --rebase
-            git add namespaces/"${BRANCH_NAME}"
+            git add namespaces/$BRANCH_NAME
             git status | grep modified
             if [ $? -eq 0 ]
             then
                 set -e
-                git commit -am "Updated ${BRANCH_NAME} namespace for build ${BUILD_NUMBER}"
+                git commit -am "Updated $BRANCH_NAME namespace for build $BUILD_NUMBER"
                 git push
             else
                 set -e
