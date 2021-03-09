@@ -98,6 +98,7 @@ node {
             }
         }
         stage("update environment repo"){
+            sshagent(['github-ssh']) {
                 sh """#/bin/bash +e
                 git add .
                 git status | grep modified
@@ -115,6 +116,7 @@ node {
                     echo "No changes since last run"
                 fi
                 """
+            }
         }
         stage("Run deployment") {
             build "../deploy"
