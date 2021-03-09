@@ -101,7 +101,7 @@ node {
         stage("update environment repo"){
             sh """#/bin/bash +e
             git pull --rebase
-            git add namespaces/${BRANCH_NAME}
+            git add namespaces/"${BRANCH_NAME}"
             git status | grep modified
             if [ $? -eq 0 ]
             then
