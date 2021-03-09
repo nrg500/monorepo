@@ -98,7 +98,7 @@ node {
             }
         }
         stage("update environment repo"){
-            sshagent(['github-ssh']) {
+            sshagent(credentials: ['github-ssh']) {
                 sh """#/bin/bash +e
                 git add .
                 git status | grep modified
