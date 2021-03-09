@@ -108,7 +108,7 @@ node {
                     git config --global user.email "jenkins@berwout.nl"
                     git config --global user.name "Jenkins"
                     git commit -am "Updated $BRANCH_NAME namespace for build $BUILD_NUMBER"
-                    git remote add origin https://$username:$password@github.com/nrg500/cluster.git
+                    #git remote add origin https://$username:$password@github.com/nrg500/cluster.git
                     git pull --rebase
                     git push
                 else
