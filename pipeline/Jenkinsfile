@@ -98,7 +98,7 @@ node {
             }
         }
         stage("update environment repo"){
-            withCredentials([usernamePassword(credentialsId: 'username', passwordVariable: 'password', usernameVariable: 'username')]) {
+            withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'password', usernameVariable: 'username')]) {
                 sh """#/bin/bash +e
                 git add namespaces/$BRANCH_NAME
                 git status | grep modified
