@@ -107,6 +107,8 @@ node {
                 git config --global user.email "jenkins@berwout.nl"
                 git config --global user.name "Jenkins"
                 git commit -am "Updated $BRANCH_NAME namespace for build $BUILD_NUMBER"
+                git push --set-upstream origin main
+                git pull --rebase
                 git push
             else
                 set -e
