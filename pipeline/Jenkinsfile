@@ -61,7 +61,7 @@ node {
 
     dir("deploy") {
         stage("Create namespace") {
-            git branch: 'main', url: 'https://github.com/nrg500/cluster.git', credentialsId: 'github'
+            git branch: 'main', url: 'git@github.com:nrg500/cluster.git', credentialsId: 'github-ssh'
             if(BRANCH_NAME && BRANCH_NAME != "main") {
                 sh "mkdir namespaces/$BRANCH_NAME"
 
@@ -98,7 +98,6 @@ node {
             }
         }
         stage("update environment repo"){
-            withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'password', usernameVariable: 'username')]) {
                 sh """#/bin/bash +e
                 git add namespaces/$BRANCH_NAME
                 git status | grep modified
@@ -106,9 +105,8 @@ node {
                 then
                     set -e
                     git config --global user.email "jenkins@berwout.nl"
-                    git config --global user.name "nrg500"
+                    git config --global user.name "Jenkins"
                     git commit -am "Updated $BRANCH_NAME namespace for build $BUILD_NUMBER"
-                    #git remote add origin https://$username:$password@github.com/nrg500/cluster.git
                     git branch --set-upstream-to=origin/main main
                     git pull --rebase
                     git push
@@ -117,7 +115,6 @@ node {
                     echo "No changes since last run"
                 fi
                 """
-            }
         }
         stage("Run deployment") {
             build "../deploy"
