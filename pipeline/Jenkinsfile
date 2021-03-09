@@ -102,7 +102,7 @@ node {
         }
         stage("update environment repo"){
             sshagent(credentials: ['github-ssh']) {
-                sh """#/bin/bash +e
+                sh """#!/bin/bash +e
                 git add .
                 git status | grep modified
                 if [ \$? -eq 0 ]
