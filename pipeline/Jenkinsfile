@@ -63,7 +63,7 @@ node {
         stage("Create namespace") {
             git branch: 'main', url: 'git@github.com:nrg500/cluster.git', credentialsId: 'github-ssh'
             if(BRANCH_NAME && BRANCH_NAME != "main") {
-                sh "mkdir namespaces/$BRANCH_NAME"
+                sh "mkdir namespaces/$BRANCH_NAME || true"
 
                 def namespace = [
                     "apiVersion": "v1",
@@ -82,16 +82,19 @@ node {
                     "bases": []
                 ]
                 productsToDeploy.each {
-                    sh "cp namespaces/main/${it}-ingress.yaml namespaces/${BRANCH_NAME}/"
-                    kustomization.resources.add("${it}-ingress.yaml");
-                    sh """sed -i -E 's/`(.*).berwout.nl`/`${BRANCH_NAME}-\\1.berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
-                    sh """sed -i -E 's/`www.berwout.nl`/`www.${BRANCH_NAME}-berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
+                    if(fileExists("namespaces/main/${it}-ingress.yaml")) {
+                        sh "cp namespaces/main/${it}-ingress.yaml namespaces/${BRANCH_NAME}/"
+                        kustomization.resources.add("${it}-ingress.yaml");
+                        sh """sed -i -E 's/`(.*).berwout.nl`/`${BRANCH_NAME}-\\1.berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
+                        sh """sed -i -E 's/`www.berwout.nl`/`www.${BRANCH_NAME}-berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
+                    }
                     kustomization.bases.add("../../services/${it}")
                 }
                 writeYaml file: "namespaces/${BRANCH_NAME}/kustomization.yaml", data: kustomization, overwrite: true
 
                 def clusterYaml = readYaml file: "kustomization.yaml"
-                if(!clusterYaml.bases.contains("namespaces/${BRANCH_NAME}")) {
+                // Necessary because readYaml doesnt return a string, but a gstringimpl which does not work with contains / equals
+                if(!(clusterYaml.bases.find{e -> e.toString().equalsIgnoreCase("namespaces/${BRANCH_NAME}")})) {
                     clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
                 }
                 writeYaml file: "kustomization.yaml", data: clusterYaml, overwrite: true
@@ -99,7 +102,7 @@ node {
         }
         stage("update environment repo"){
             sshagent(credentials: ['github-ssh']) {
-                sh """#/bin/bash +e
+                sh """#!/bin/bash +e
                 git add .
                 git status | grep modified
                 if [ \$? -eq 0 ]
