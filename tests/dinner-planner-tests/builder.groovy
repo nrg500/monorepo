@@ -18,6 +18,10 @@ def build() {
                 writeYaml file: "job.yaml", data: jobYaml, overwrite: true
                 sh "kubectl apply -f job.yaml"
                 sh "kubectl wait --for=condition=complete --timeout=30s job/${jobName}"
+                sh """#!/bin/bash -e
+                pods=$(kubectl get pods --selector=job-name=${jobName} --output=jsonpath='{.items[*].metadata.name}' -nsvc)
+                kubectl logs $pods
+                """
             }
         }
     }
