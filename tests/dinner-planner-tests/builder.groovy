@@ -1,10 +1,9 @@
 def build() {
     return {
         dir("tests/dinner-planner-tests") {
+            def imageName = "berwoutv/dinner-planner-tests:${BRANCH_NAME}-${BUILD_NUMBER}"
+            def jobName = "dinner-planner-tests-${BRANCH_NAME}-${BUILD_NUMBER}"
             stage("Create test container") {
-
-                def imageName = "berwoutv/dinner-planner-tests:${BRANCH_NAME}-${BUILD_NUMBER}"
-                def jobName = "dinner-planner-tests-${BRANCH_NAME}-${BUILD_NUMBER}"
                 def dockerImage = docker.build(imageName, ".")
                 docker.withRegistry('', 'dockerhub') {
                     dockerImage.push()
@@ -23,7 +22,7 @@ def build() {
                 try {
                     sh "kubectl wait --for=condition=complete --timeout=30s job/${jobName} -ndefault"
                 } catch (Exception e) {
-                    
+
                 } finally {
                     def pods = sh(returnStdout: true, script: "kubectl get pods --selector=job-name=${jobName} --output=jsonpath='{.items[*].metadata.name}' -ndefault")
                     sh "kubectl logs $pods -ndefault"
