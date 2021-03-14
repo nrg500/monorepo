@@ -61,7 +61,7 @@ public class StepDefinitions{
 
     @Then("We should have successfully added a new meal")
     public void weShouldHaveSuccesfullyAddedANewMeal() {
-
+        driver.quit();
     }
 
 }
