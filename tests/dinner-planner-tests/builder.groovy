@@ -15,6 +15,7 @@ def build() {
                 jobYaml.spec.template.spec.containers[0].image = imageName
                 jobYaml.metadata.name = jobName
                 jobYaml.spec.template.spec.containers[0].name = jobName
+                writeYaml file: "job.yaml", data: jobYaml, overwrite: true
                 sh "kubectl apply -f job.yaml"
                 sh "kubectl wait --for=condition=complete --timeout=30s job/${jobName}"
             }
