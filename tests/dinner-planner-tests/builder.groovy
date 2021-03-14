@@ -11,7 +11,7 @@ def build() {
                 sh "docker rmi ${imageName}"
                 def test_uri = BRANCH_NAME == "main" ? "https://dinner.berwout.nl" : "https://${BRANCH_NAME}-dinner.berwout.nl"
                 def jobYaml = readYaml file: "job.yaml"
-                jobYaml.spec.template.spec.containers[0].env = [{"name": "test_uri", "value": test_uri}]
+                jobYaml.spec.template.spec.containers[0].env = [["name": "test_uri", "value": test_uri]]
                 jobYaml.spec.template.spec.containers[0].image = imageName
                 jobYaml.metadata.name = jobName
                 jobYaml.spec.template.spec.containers[0].name = jobName
