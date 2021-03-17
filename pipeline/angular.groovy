@@ -1,8 +1,9 @@
 def apply(product) {
     return {
         stage("Building ${product}") {
-            docker.image('node:13').inside() {
-                dir("products/${product}") {
+             dir("products/${product}") {
+                unstash "${product}"
+                docker.image('node:13').inside() {
                     sh "npm install"
                     sh "npm install -g @angular/cli@latest"
                     sh "ng build --prod --outputPath=build/dist"
