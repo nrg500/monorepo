@@ -86,7 +86,7 @@ node {
                         sh "cp namespaces/main/${it}-ingress.yaml namespaces/${BRANCH_NAME}/"
                         kustomization.resources.add("${it}-ingress.yaml");
                         sh """sed -i -E 's/`(.*).berwout.nl`/`${BRANCH_NAME}-\\1.berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
-                        sh """sed -i -E 's/`www.berwout.nl`/`www.${BRANCH_NAME}-berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
+                        sh """sed -i -E 's/`www.berwout.nl`/`${BRANCH_NAME}.berwout.nl`/g' namespaces/${BRANCH_NAME}/${it}-ingress.yaml"""
                     }
                     kustomization.bases.add("../../services/${it}")
                 }
