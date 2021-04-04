@@ -62,6 +62,28 @@ It looks something like this:
 
 ![picture of dns challenge](https://berwout.nl/dns_challenge.gif)
 
+All I had to do to get this working is add a few environment variables and arguments to the traefik deployment:
+
+```yaml
+env:
+  - name: TRANSIP_ACCOUNT_NAME
+    value: <account_name>
+  - name: TRANSIP_PRIVATE_KEY_PATH
+    value: <location of secret key mount>
+args:
+  - --certificatesresolvers.myresolver.acme.dnschallenge=true
+  - --certificatesresolvers.myresolver.acme.dnschallenge.provider=transip
+  - --certificatesresolvers.myresolver.acme.dnschallenge.delaybeforecheck=0
+  - --certificatesresolvers.myresolver.acme.dnschallenge.resolvers=ns0.transip.net,ns1.transip.nl,ns2.transip.eu,1.1.1.1,8.8.8.8
+```
+
+Basically I tell it what credentials to use to connect with my transip account and I tell it to use a dnschallenge. Because dns usually takes a while to propagate, which means it would take a while to get the certificate. I am pointing the traefik proxy to ask it to transips domain name servers first.
+
+## Conclusion
+What I ended up with is a combination of this [guide by traefik](https://doc.traefik.io/traefik/user-guides/crd-acme/) and the information about DNS-challenges on [this page](https://doc.traefik.io/traefik/https/acme/), to end up with [this configuration for my proxy](https://github.com/nrg500/cluster/blob/main/services/traefik/deployment.yaml). Now I have automated certificate generation and renewal for [*.berwout.nl](https://berwout.nl) and [www.berwout.nl](https://berwout.nl).
+
+
+
 
 
 
