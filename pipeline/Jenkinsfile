@@ -33,7 +33,7 @@ node {
                 productsToBuild = sh (
                     script: 'find products/ -maxdepth 1 -type d | sed -r "s|products/||"',
                     returnStdout: true
-                ).split('\n').trim() as Set
+                ).split('\n') as Set
             }
             print("products to build: " + productsToBuild)
 
