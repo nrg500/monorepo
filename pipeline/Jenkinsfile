@@ -4,7 +4,7 @@ node {
         checkout([$class: 'GitSCM',branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false,
         extensions: [[$class: 'CloneOption',
                 depth: 50,
-               **noTags**: **false**,
+               noTags: false,
                reference: '', shallow: true]],
         submoduleCfg: [],
         userRemoteConfigs: [[]]])
