@@ -17,7 +17,7 @@ node {
             def availableTests = sh (
                 script: 'find tests/ -maxdepth 1 -type d | sed -r "s|tests/||"',
                 returnStdout: true
-            ).split('\n')
+            ).replaceFirst('\n', '').split('\n')
 
             diffs.each {
                 def product = it.trim() =~ productsRegex
@@ -33,7 +33,7 @@ node {
                 productsToBuild = sh (
                     script: 'find products/ -maxdepth 1 -type d | sed -r "s|products/||"',
                     returnStdout: true
-                ).split('\n') as Set
+                ).replaceFirst('\n', '').split('\n') as Set
             }
             print("products to build: " + productsToBuild)
 
