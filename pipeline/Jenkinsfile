@@ -1,7 +1,13 @@
 node {
     deleteDir()
     dir("source") {
-        checkout scm
+        checkout([$class: 'GitSCM',branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false,
+        extensions: [[$class: 'CloneOption',
+                depth: 50,
+               **noTags**: **false**,
+               reference: '', shallow: true]],
+        submoduleCfg: [],
+        userRemoteConfigs: [[]]])
         stage("Determine products and tests to run.") {
             def diffResult
             if(BRANCH_NAME == "master") {
