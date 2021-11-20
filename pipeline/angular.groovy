@@ -1,7 +1,7 @@
 def apply(product) {
     return {
         stage("Building ${product}") {
-            docker.image('node:13').inside() {
+            docker.image('node:latest').inside() {
                 dir("products/${product}") {
                     sh "npm install"
                     sh "npm install -g @angular/cli@latest"

@@ -3,7 +3,12 @@ node {
     dir("source") {
         checkout scm
         stage("Determine products and tests to run.") {
-            def diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
+            def diffResult
+            if(BRANCH_NAME == "master") {
+                diffResult = sh(returnStdout: true, script: "git diff $(git show-ref -s $(git describe --abbrev=0 --tags)) HEAD --name-only")
+            } else {
+                diffResult = sh(returnStdout: true, script: "git diff origin/master... --name-only")
+            }
             def diffs = diffResult.split('\n')
             def productsRegex = /products\/(.*?)\/.*/
             def testsRegex = /tests\/(.*?)\/.*/
@@ -23,6 +28,12 @@ node {
                 if(test.matches()) {
                     testsToRun.add(test[0][1])
                 }
+            }
+            if(productsToBuild.isEmpty && BRANCH_NAME == 'master'){
+                productsToBuild = sh (
+                    script: 'find products/ -maxdepth 1 -type d | sed -r "s|products/||"',
+                    returnStdout: true
+                ).split('\n').trim() as Set
             }
             print("products to build: " + productsToBuild)
 
@@ -134,5 +145,20 @@ node {
             }
         }
         parallel(testStageDefinitionMap)
+
+        stage ("Tag release") {
+            if(BRANCH_NAME == 'master') {
+                sshagent(credentials: ['github-ssh']) {
+                    sh """#!/bin/bash -e
+                    git tag -a $BUILD_NUMBER -m $productsToBuild
+                    git config --global user.email "jenkins@berwout.nl"
+                    git config --global user.name "nrg500"
+                    git branch --set-upstream-to=origin/master master
+                    git pull --rebase
+                    git push origin $BUILD_NUMBER
+                    """
+                }
+            }
+        }
     }
 }
