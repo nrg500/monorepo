@@ -7,7 +7,7 @@ node {
                noTags: false,
                reference: '', shallow: true]],
         submoduleCfg: [],
-        userRemoteConfigs: [[]]])
+        userRemoteConfigs: []])
         stage("Determine products and tests to run.") {
             def diffResult
             if(BRANCH_NAME == "master") {
