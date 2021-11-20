@@ -153,7 +153,6 @@ node {
                     git tag -a $BUILD_NUMBER -m $productsToBuild
                     git config --global user.email "jenkins@berwout.nl"
                     git config --global user.name "nrg500"
-                    git branch --set-upstream-to=origin/master master
                     git pull --rebase
                     git push origin $BUILD_NUMBER
                     """
