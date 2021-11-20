@@ -29,7 +29,7 @@ node {
                     testsToRun.add(test[0][1])
                 }
             }
-            if(productsToBuild && BRANCH_NAME == 'master'){
+            if(!productsToBuild && BRANCH_NAME == 'master'){
                 productsToBuild = sh (
                     script: 'find products/ -maxdepth 1 -type d | sed -r "s|products/||"',
                     returnStdout: true
