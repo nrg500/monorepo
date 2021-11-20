@@ -146,17 +146,17 @@ node {
         }
         parallel(testStageDefinitionMap)
 
-        stage ("Tag release") {
-            if(BRANCH_NAME == 'master') {
-                sshagent(credentials: ['github-ssh']) {
-                    sh """#!/bin/bash -e
-                    git tag -a $BUILD_NUMBER -m "$productsToBuild"
-                    git config --global user.email "jenkins@berwout.nl"
-                    git config --global user.name "nrg500"
-                    git push origin $BUILD_NUMBER
-                    """
-                }
-            }
-        }
+        // stage ("Tag release") {
+        //     if(BRANCH_NAME == 'master') {
+        //         sshagent(credentials: ['github-ssh']) {
+        //             sh """#!/bin/bash -e
+        //             git tag -a $BUILD_NUMBER -m "$productsToBuild"
+        //             git config --global user.email "jenkins@berwout.nl"
+        //             git config --global user.name "nrg500"
+        //             git push origin $BUILD_NUMBER
+        //             """
+        //         }
+        //     }
+        // }
     }
 }
