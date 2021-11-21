@@ -140,7 +140,7 @@ node {
                     images.add(imageDict)
                 }
                 for(imageInMainNameSpace in mainYaml.images) {
-                    if(!(images.find(e -> e.name.equalsIgnoreCase(imageInMainNameSpace.name.toString())))) {
+                    if(!(images.find({e -> e.name.equalsIgnoreCase(imageInMainNameSpace.name.toString())}))) {
                         def imageDict = [:]
                         imageDict['name'] = imageInMainNameSpace.name.toString()
                         imageDict['newTag'] =  imageInMainNameSpace.newTag.toString()
