@@ -1,4 +1,4 @@
-def apply(product) {
+def apply(product, version) {
     return {
         stage("Building product") {
             docker.image('maven:3').inside() {
@@ -10,7 +10,7 @@ def apply(product) {
         }
         stage("Uploading as docker image") {
             def dockerBuild = load('pipeline/docker.groovy')
-            dockerBuild.buildAndUploadImage(product, 'berwoutv', '.')
+            dockerBuild.buildAndUploadImage('berwoutv', product, version, '.')
         }
     }
 }

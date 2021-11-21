@@ -64,7 +64,7 @@ node {
             productStageDefinitionMap = [:]
             productsToBuild.each {
                 builder = load("products/${it}/builder.groovy")
-                productStageDefinitionMap.put(it, builder.build())
+                productStageDefinitionMap.put(it, builder.build("${BRANCH_NAME}-${BUILD_NUMBER}"))
             }
         }
         parallel(productStageDefinitionMap)
@@ -73,8 +73,8 @@ node {
     dir("deploy") {
         stage("Create namespace") {
             git branch: 'main', url: 'git@github.com:nrg500/cluster.git', credentialsId: 'github-ssh'
-            if(BRANCH_NAME && BRANCH_NAME != "main") {
-                sh "mkdir namespaces/$BRANCH_NAME || true"
+            if(BRANCH_NAME && BRANCH_NAME != "master") {
+                sh "mkdir namespaces/${BRANCH_NAME} || true"
 
                 def namespace = [
                     "apiVersion": "v1",
@@ -84,11 +84,32 @@ node {
                     ]
                 ]
                 writeYaml file: "namespaces/${BRANCH_NAME}/namespace.yaml", data: namespace, overwrite: true
+                
+                def mainKustomization = readYaml file: "namespaces/main/kustomization.yaml"
+                def productsNotInBuild = productsToDeploy - productsToBuild
+                for(String productNotInBuild : productsNotInBuild) {
+                    def image = mainKustomization.images.find{e -> e.name.toString().equalsIgnoreCase("berwoutv/${productNotInBuild}")}
+                    def imageDict = [:]
+                    imageDict['name'] = "berwoutv/${productNotInBuild}"
+                    imageDict['newTag'] =  image.newTag.toString()
+                    images.add(imageDict)
+                }
+
+                def images = []
+                for(String productToBuild : productsToBuild) {
+                    def imageDict = [:]
+                    imageDict['name'] = "berwoutv/${productToBuild}"
+                    imageDict['newTag'] =  "${BRANCH_NAME}-${BUILD_NUMBER}"
+                    images.add(imageDict)
+                }
+
+                print images
             
                 def kustomization = [
                     "apiVersion": "kustomize.config.k8s.io/v1beta1",
                     "kind": "Kustomization",
                     "namespace": "${BRANCH_NAME}",
+                    "images": images,
                     "resources": ["namespace.yaml"],
                     "bases": []
                 ]
@@ -109,6 +130,25 @@ node {
                     clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
                 }
                 writeYaml file: "kustomization.yaml", data: clusterYaml, overwrite: true
+            } else if(BRANCH_NAME && BRANCH_NAME == 'master') {
+                def mainYaml = readYaml file: "namespaces/main/kustomization.yaml"
+                def images = []
+                for(String productToBuild : productsToBuild) {
+                    def imageDict = [:]
+                    imageDict['name'] = "berwoutv/${productToBuild}"
+                    imageDict['newTag'] =  "${BRANCH_NAME}-${BUILD_NUMBER}"
+                    images.add(imageDict)
+                }
+                for(imageInMainNameSpace in mainYaml.images) {
+                    if(!(images.find({e -> e.name.equalsIgnoreCase(imageInMainNameSpace.name.toString())}))) {
+                        def imageDict = [:]
+                        imageDict['name'] = imageInMainNameSpace.name.toString()
+                        imageDict['newTag'] =  imageInMainNameSpace.newTag.toString()
+                        images.add(imageDict)
+                    }
+                }
+                mainYaml.images = images;
+                writeYaml file: "namespaces/main/kustomization.yaml", data: mainYaml, overwrite: true
             }
         }
         stage("update environment repo"){

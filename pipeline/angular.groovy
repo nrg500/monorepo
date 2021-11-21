@@ -1,4 +1,4 @@
-def apply(product) {
+def apply(product, version) {
     return {
         stage("Building ${product}") {
             docker.image('node:14').inside() {
@@ -12,7 +12,7 @@ def apply(product) {
         }
         stage("Uploading as docker image") {
             def dockerBuild = load('pipeline/docker.groovy')
-            dockerBuild.buildAndUploadImage(product, 'berwoutv', 'build')
+            dockerBuild.buildAndUploadImage('berwoutv', product, version, 'build')
         }
     }
 }
