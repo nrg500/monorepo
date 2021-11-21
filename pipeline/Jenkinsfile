@@ -89,12 +89,18 @@ node {
                 def productsNotInBuild = productsToDeploy - productsToBuild
                 for(String productNotInBuild : productsNotInBuild) {
                     def image = mainKustomization.images.find{e -> e.name.toString().equalsIgnoreCase("berwoutv/${productNotInBuild}")}
-                    images.add({"name" : "berwoutv/${productNotInBuild}", "newTag": image.newTag.toString()})
+                    def imageDict [:]
+                    imageDict['name'] = "berwoutv/${productNotInBuild}"
+                    imageDict['newTag'] =  image.newTag.toString()
+                    images.add(imageDict)
                 }
 
                 def images = []
                 for(String productToBuild : productsToBuild) {
-                    images.add({"name" : "berwoutv/${productToBuild}", "newTag" : "${BRANCH_NAME}-${BUILD_NUMBER}"})
+                    def imageDict [:]
+                    imageDict['name'] = "berwoutv/${productToBuild}"
+                    imageDict['newTag'] =  "${BRANCH_NAME}-${BUILD_NUMBER}"
+                    images.add(imageDict)
                 }
 
                 print images
