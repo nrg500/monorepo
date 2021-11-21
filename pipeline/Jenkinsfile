@@ -64,7 +64,7 @@ node {
             productStageDefinitionMap = [:]
             productsToBuild.each {
                 builder = load("products/${it}/builder.groovy")
-                productStageDefinitionMap.put(it, builder.build("${BRANCH_NAME}-${$BUILD_NUMBER}"))
+                productStageDefinitionMap.put(it, builder.build("${BRANCH_NAME}-${BUILD_NUMBER}"))
             }
         }
         parallel(productStageDefinitionMap)
@@ -74,7 +74,7 @@ node {
         stage("Create namespace") {
             git branch: 'main', url: 'git@github.com:nrg500/cluster.git', credentialsId: 'github-ssh'
             if(BRANCH_NAME && BRANCH_NAME != "master") {
-                sh "mkdir namespaces/$BRANCH_NAME || true"
+                sh "mkdir namespaces/${BRANCH_NAME} || true"
 
                 def namespace = [
                     "apiVersion": "v1",
