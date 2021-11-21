@@ -1,0 +1,23 @@
+<div id="sidebar" class="col-xs-4 col-sm-3 col-md-2 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+    <p><img src={{ printf "img/portfolio/Liza.jpg" | absURL }} class="avatar" alt="Avatar"></p>
+    {{ range .Site.Params.sidebarAbout }}
+      <p class="sidebar-p">{{ . | safeHTML }}</p>
+    {{ end }}
+    <ul class="sidebar-menu">
+      {{ range .Site.Params.navlinks }}
+        <li><a href="{{ absURL .url }}">{{ .name }}</a></li>
+      {{ end }}
+    </ul>
+    {{ partial "social_buttons_in_sidebar.html" . }}
+
+    <div class="copyright">
+      <p class="credit">
+        {{ with .Site.Params.copyright }}
+          {{ . | safeHTML }}
+        {{ end }}
+      </p>
+    </div>
+  </div>
+</div>
