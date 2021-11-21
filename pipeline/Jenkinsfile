@@ -130,6 +130,25 @@ node {
                     clusterYaml.bases.add("namespaces/${BRANCH_NAME}")
                 }
                 writeYaml file: "kustomization.yaml", data: clusterYaml, overwrite: true
+            } else if(BRANCH_NAME && BRANCH_NAME == 'master') {
+                def mainYaml = readYaml file: "namespaces/main/kustomization.yaml"
+                def images = []
+                for(String productToBuild : productsToBuild) {
+                    def imageDict = [:]
+                    imageDict['name'] = "berwoutv/${productToBuild}"
+                    imageDict['newTag'] =  "${BRANCH_NAME}-${BUILD_NUMBER}"
+                    images.add(imageDict)
+                }
+                for(imageInMainNameSpace : mainYaml.images) {
+                    if(!(images.find(e -> e.name.equalsIgnoreCase(imageInMainNameSpace.name.toString())))) {
+                        def imageDict = [:]
+                        imageDict['name'] = imageInMainNameSpace.name.toString()
+                        imageDict['newTag'] =  imageInMainNameSpace.newTag.toString()
+                        images.add(imageDict)
+                    }
+                }
+                mainYaml.images = images;
+                writeYaml file: "namespaces/main/kustomization.yaml", data: mainYaml, overwrite: true
             }
         }
         stage("update environment repo"){
