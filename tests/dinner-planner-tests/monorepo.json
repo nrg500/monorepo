@@ -1,3 +1,0 @@
-{
-    "requiredProducts" : ["meal-service", "ingredient-service", "dinner-planner", "mongo-setup"]
-}
