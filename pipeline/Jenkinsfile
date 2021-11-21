@@ -85,7 +85,7 @@ node {
                 ]
                 writeYaml file: "namespaces/${BRANCH_NAME}/namespace.yaml", data: namespace, overwrite: true
                 
-                def mainKustomization = readYaml file: "main/kustomization.yaml"
+                def mainKustomization = readYaml file: "namespaces/main/kustomization.yaml"
                 def productsNotInBuild = productsToDeploy - productsToBuild
                 for(String productNotInBuild : productsNotInBuild) {
                     def image = mainKustomization.images.find{e -> e.name.toString().equalsIgnoreCase("berwoutv/${productNotInBuild}")}
