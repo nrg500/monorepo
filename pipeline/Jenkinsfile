@@ -5,7 +5,8 @@ node {
         stage("Determine products and tests to run.") {
             def diffResult
             if(BRANCH_NAME == "master") {
-                diffResult = sh(returnStdout: true, script: 'git diff $(git show-ref -s $(git describe --abbrev=0 --tags)) HEAD --name-only')
+                // diffResult = sh(returnStdout: true, script: 'git diff $(git show-ref -s $(git describe --abbrev=0 --tags)) HEAD --name-only')
+                diffResult = ""
             } else {
                 diffResult = sh(returnStdout: true, script: 'git diff origin/master... --name-only')
             }
