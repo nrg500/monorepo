@@ -139,7 +139,7 @@ node {
                     imageDict['newTag'] =  "${BRANCH_NAME}-${BUILD_NUMBER}"
                     images.add(imageDict)
                 }
-                for(imageInMainNameSpace : mainYaml.images) {
+                for(imageInMainNameSpace in mainYaml.images) {
                     if(!(images.find(e -> e.name.equalsIgnoreCase(imageInMainNameSpace.name.toString())))) {
                         def imageDict = [:]
                         imageDict['name'] = imageInMainNameSpace.name.toString()
