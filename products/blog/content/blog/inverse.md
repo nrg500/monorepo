@@ -10,7 +10,7 @@ categories = ["shorts"]
 # The inverse ratio between social position and humaneness
 
 ## Introduction
-I was reading The Gulag Archipelago by Solzhenitsyn and encountered this phrase where he is describing the social hierarchy of guards in the Gulag as: "The inverse ratio between social position and humaneness".  The context is that according to Solzhenitsyn there is a negative selection process that occurs in the training, education and most obviously in the work of the guards. This selection process as a result causes a situation where almost invariably the higher up the ladder a guard ends up, the less humane this guard would have to be. In other words, to be a succesful guard, you must be inhumane.
+I was reading The Gulag Archipelago by Solzhenitsyn and encountered this phrase where he is describing the social hierarchy of guards in the Gulag as: "The inverse ratio between social position and humaneness".  The context is that according to Solzhenitsyn there is a negative selection process that occurs in the training, education and most obviously in the work of the guards. This selection process causes a situation where almost invariably the higher up the ladder a guard ends up, the less humane this guard would have to be. In other words, to be a succesful guard, you must be inhumane.
 
 Now I'd like to be specific here, because I am not trying to suggest that working in a company is anything like being in a Gulag. I would just like to examine the following idea: If there is a selection process present in the training, education and work inside a company that encourages negative traits, then those that end up having a higher social status, exhibit these negative traits the strongest.
 
