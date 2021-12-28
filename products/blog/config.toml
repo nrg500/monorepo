@@ -1,40 +1,27 @@
-baseUrl = "https://berwout.nl"
-languageCode = "en-gb"
-title = "Berwout"
-copyright = "Copyright © 2021, Berwout de Vries Robles; all rights reserved."
-theme = "npq-hugo"
-themesdir = ""
-pygmentsUseClasses=true
+baseurl = "https://berwout.nl"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = "true"
+title = "Berwouts' blog"
+theme = "hamburg"
 
 [params]
-  author = "Berwout de Vries Robles"
-  description = "Software Engineer"
-  keywords = "software engineering"
-  useAvatar = true
-  microBlogSection = "posts"
-  displayMicroBlog = false
-  displayRecent = true
-  recentMax = 3
-  mail = "bwdevr@gmail.com"
+    # Short subtitle/tagline. This is displayed in the header.
+    subtitle = "A place to organize all my thoughts"
+    # Defines the tab color in Chrome for Android.
+    themecolor = "#hexcolor"
+    # To load additional CSS styles
+    customCSS = ['hamburg.css']
+    # Show this very user-friendly and absolutely not annoying GDPR notice at the bottom of the page
+    ShowGDPRNotice = true
+    # Since 0.57.0 there's the concept of "main sections". The files for the section "posts" are in "./content/posts/".
+    mainSections = ["posts"]
 
 [menu]
-  [[menu.main]]
-    name = "home"
-    pre = "<i class=\"fas fa-home fa-sm\"></i>"
-    url = "/"
-    weight = -9 
-  [[menu.main]]
-    name = "blog"
-    pre = "<i class=\"fas fa-keyboard fa-ms\"></i>"
-    url = "/blog/"
-    weight = -8
-  [[menu.main]]
-    name = "tags"
-    pre = "<i class=\"fas fa-tags fa-ms\"></i>"
-    url = "/tags/"
-    weight = -7 
-  [[menu.main]]
-    name = "github"
-    pre = "<i class=\"fab fa-github fa-ms\"></i>"
-    url = "https://github.com/nrg500"
-    weight = -6 
+
+[languages]
+    [languages.en]
+        languageCode = "en"
+        languageName = "English"
+        subtitle = "A place to organize all my thoughts"
+        # Copyright notice. This is displayer in the footer.
+        copyright = "&copy; Berwout 2021"

@@ -2,9 +2,8 @@
 author = "Berwout de Vries Robles"
 title = "Building a home kubernetes cluster - One node cluster"
 date = "2021-02-28"
-description = "Part 3 of series describing the home cluster build."
+summary = "Part 3 of series describing the home cluster build. All the preparations are done, time to finally start making a cluster!"
 tags = ["cluster"]
-categories = ["series"]
 +++
 
 # Building a home kubernetes cluster - One node cluster

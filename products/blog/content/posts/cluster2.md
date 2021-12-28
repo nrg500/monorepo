@@ -2,9 +2,8 @@
 author = "Berwout de Vries Robles"
 title = "Building a home kubernetes cluster - Setting up a DMZ"
 date = "2021-02-22"
-description = "Part 2 of series describing the home cluster build."
+summary = "Part 2 of series describing the home cluster build. Before we create a cluster that we want to expose to the outside world, we need to make sure our home network is not overly exposed."
 tags = ["cluster"]
-categories = ["series"]
 +++
 
 # Building a home kubernetes cluster - Setting up a DMZ

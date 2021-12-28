@@ -2,9 +2,8 @@
 author = "Berwout de Vries Robles"
 title = "Building a home kubernetes cluster - Project start"
 date = "2021-02-21"
-description = "Part 1 of series describing the home cluster build."
+summary = "Part 1 of series describing the home cluster build. Gathering the pieces required to set up a cluster inside my utility box at home."
 tags = ["cluster"]
-categories = ["series"]
 +++
 
 # Building a home kubernetes cluster - Project start
