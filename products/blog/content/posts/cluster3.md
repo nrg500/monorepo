@@ -59,7 +59,7 @@ Traefik helps me by automating the certifcate request and renewal. Basically it 
 
 It looks something like this:
 
-![picture of dns challenge](https://berwout.nl/dns_challenge.gif)
+![picture of dns challenge](https://berwout.nl/img/dns_challenge.gif)
 
 All I had to do to get this working is add a few environment variables and arguments to the traefik deployment:
 

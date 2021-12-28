@@ -18,7 +18,7 @@ One of the easiest ways to set up a DMZ at home is to use a secondary router/fir
 
 Basically something like this:
 
-![picture of idea placeholder](https://berwout.nl/berdmz.png)
+![picture of idea placeholder](https://berwout.nl/img/berdmz.png)
 
 ## Setting up
 Note that your hardware is probably different from mine, but the steps below should work for most routers on the market. Sometimes the "security" features like port forwarding are hidden on consumer routers like it was on the router from my ISP. In the end I had to request a firmware update to get access to port forwarding and sometimes you may need to buy two routers, using the ISP's router purely as a modem.

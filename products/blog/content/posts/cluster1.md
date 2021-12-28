@@ -28,7 +28,7 @@ For now a single node cluster will do because I'm currently in such an early sta
 
 Something like this is the general idea:
 
-![picture of idea placeholder](https://berwout.nl/bercloud.png)
+![picture of idea placeholder](https://berwout.nl/img/bercloud.png)
 
 ## Setting up
 
