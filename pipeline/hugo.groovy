@@ -1,7 +1,7 @@
 def apply(product, version) {
     return {
         stage("Building ${product}") {
-            docker.image('klakegg/hugo:latest').inside("--entrypoint=") {
+            docker.image('klakegg/hugo:0.83.1').inside("--entrypoint=") {
                 dir("products/${product}") {
                     sh "hugo"
                     stash name: "${product}", includes: "public/*"
