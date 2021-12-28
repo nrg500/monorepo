@@ -1,4 +1,4 @@
-baseurl = "https://berwout.nl"
+baseurl = "https://berwout.nl/"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = "true"
 title = "Berwouts' blog"
