@@ -2,7 +2,7 @@
 author = "Berwout de Vries Robles"
 title = "The inverse ratio between social position and humaneness"
 date = "2021-12-06"
-summary = "How is it that the larger companies get, the more inhumane they seem to become? The larger the social hierarchy, the more the wrong people tend to float toward the top. In this blog I write out some thoughts on social hierarchy in companies. I float some ideas on why this may be and how we could improve."
+summary = "How is it that the larger companies get, the more inhumane they seem to become? In this blog I write out some thoughts on social hierarchy in companies."
 tags = ["thoughts"]
 +++
 
