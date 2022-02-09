@@ -1,7 +1,7 @@
 +++
 author = "Berwout de Vries Robles"
 title = "The limit of uncertainty"
-date = "2021-02-05"
+date = "2022-02-09"
 summary = "Dealing with uncertainty is a primary skill in Software engineering. Let's talk about it!"
 tags = ["thoughts"]
 +++
