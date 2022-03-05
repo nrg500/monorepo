@@ -5,7 +5,6 @@ title = "Berwouts' blog"
 copyright = "&copy; Berwout 2021"
 
 [params]
-    GoogleAnalyticsID = ""
     twitter = "@berwout_dvr"
     github = "nrg500"
     linkedin = "berwout-de-vries-robles-4712b355"
