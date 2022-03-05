@@ -1,29 +1,23 @@
 <article>
   <header>
-    <h1 class="li-h1"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-    <div class="clearfix">
+    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    <div class="post-meta clearfix">
       <div class="post-date pull-left">
-        <span class="li-small">
-          {{ i18n "postedOn" }}
-          {{ .Date.Format ( i18n "dateTimeFormat" ) }}
-        </span>
+        Posted on
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
+          {{ .Date.Format "Jan 2, 2006" }}
+        </time>
       </div>
     </div>
   </header>
-
-  {{ if (isset .Params "summary") }}
-    <div class="li-content">
-      <div class="summary-container">
-        <p>{{ .Params.Summary | .Page.RenderString }}</p>
-        <a class="btn btn-primary" href="{{ .Permalink }}">
-          {{ i18n "readMore" }} <span aria-hidden="true">&rarr;</span>
-        </a>
-      </div>
-      {{ if (isset .Params "images") }}
-        <a href="{{ .Permalink }}">
-          <img class="embedded-image" src="{{ index .Params.images 0 | absLangURL }}"/>
-        </a>
-      {{ end }}
-    </div>
+  <div>
+    {{ .Summary }}
+  </div>
+  {{ if .Truncated }}
+  <footer>
+    <ul class="pager">
+      <li class="next"><a href="{{ .Permalink }}">Read more <span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+  </footer>
   {{ end }}
 </article>

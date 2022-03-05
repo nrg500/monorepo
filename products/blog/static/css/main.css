@@ -6,92 +6,100 @@ main {
 /* Header */
 
 .global-header {
+    background: #222 center center;
     background-size: contain;
-    background-position-x: center;
-    min-height: 350px;
+    height: 15em;
 }
 
 .header-text {
     position: relative;
-    min-height: inherit;
+    padding-bottom: 1px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .header-text .tag-line {
-    margin: 25px auto;
+    margin: 10px auto;
     padding: 0 10px;
     max-width: 430px;
+    color: rgba(255, 255, 255, 0.7);
     text-align: center;
-    font-weight: 200;
+    font-weight: 300;
+}
+
+.header-text .sns-links {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.header-text .sns-links a {
+    display: inline-block;
+    margin: 0 2px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 30px;
+    transition: color,border-color 0.1s linear;
+}
+
+.header-text .sns-links a:hover {
+    border-color: rgba(255, 255, 255, 1.0);
+    color: rgba(255, 255, 255, 1.0);
 }
 
 .header-text h1 {
     margin: 0 auto;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 30px;
     text-align: center;
-    font-weight: 100;
-    font-size: 52px;
-    border-bottom: 1px solid;
-    max-width: 550px;
+    font-weight: 200;
 }
 
 .header-text h1 a {
+    color: rgba(255, 255, 255, 1.0);
     text-decoration: none;
 }
 
-.btn-home {
+a.btn-header {
     position: absolute;
-    left: 20px;
+    top: 20px;
+    padding: 7px 16px;
+    border: 1px solid rgba(255, 255, 255, 1.0);
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 1.0);
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 13px;
+    transition: color,background-color 0.1s linear;
 }
 
-/* Navbar */
-
-.navbar-container {
-    display: flex;
-    flex-direction: row-reverse;
-    position: absolute;
-    /* right: 20px; */
-    bottom: 20px;
-    width: 100%;
-    justify-content: center;
+a.btn-header:hover {
+    background-color: rgba(255, 255, 255, 1.0);
+    color: rgba(0, 0, 0, 1.0);
 }
 
-.navbar-item {
-    margin-left: 20px;
-    position: initial !important;
-}
-
-.navbar-item:last-child {
-    margin-left: 0px;
-}
-
-/* Language list */
-
-.language-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    position: absolute;
+a.btn-subscribe {
     right: 20px;
 }
 
-.language-button {
-    margin-left: 5px;
-    position: initial !important;
-}
-
-@media (min-width: 900px) {
-  .language-container, .btn-home {
-    top: 20px;
-  }
+a.btn-back {
+    left: 20px;
 }
 
 /* Footer */
 
 .global-footer {
+    margin-top: 10px;
     padding-top: 10px;
     max-width: 750px;
     height: 100px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.4);
 }
 
 .global-footer .sns-links {
@@ -102,55 +110,56 @@ main {
     display: inline-block;
     width: 24px;
     height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 12px;
+    color: rgba(0, 0, 0, 0.4);
     vertical-align: top;
     text-align: center;
     text-decoration: none;
     font-size: 13px;
-    /*
-    XXX Maybe but this in? Somethimes it's not smooth and that makes it ugly...
     transition: color,border-color 0.1s linear;
-    */
 }
 
 .global-footer .sns-links a i {
     vertical-align: middle;
 }
 
+.global-footer .sns-links a:hover {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.7);
+}
+
 /* Article */
 
 .article-list h2 a {
     text-decoration: none;
-    /*
-    XXX Maybe but this in? Somethimes it's not smooth and that makes it ugly...
     transition: color 0.1s linear;
-    */
 }
 
-.article-title {
-    position: relative;
+.post-meta {
+    margin: 5px 0;
 }
 
-.article-title h1 {
-    font-size: 44px;
-}
-
-.article-title * {
-    text-align: center;
+.post-date {
+    color: rgba(0, 0, 0, 0.4);
 }
 
 .post-tag a {
-    margin-left: 10px;
     padding: 0 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 12px;
+    color: rgba(0, 0, 0, 0.3);
     text-decoration: none;
-    /*
-    XXX Maybe but this in? Somethimes it's not smooth and that makes it ugly...
     transition: color,border-color,background-color 0.1s linear;
-    */
+}
+
+.post-tag a:hover {
+    background-color: rgba(0, 0, 0, 1.0);
+    color: rgba(255, 255, 255, 1.0);
 }
 
 .not-found h1 {
+    color: rgba(0, 0, 0, 0.2);
     font-weight: 200;
     font-size: 80px;
 }
@@ -160,11 +169,18 @@ main {
 }
 
 .author-info {
-    overflow: auto;
+    padding: 25px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .author-name {
     margin: 0 0 5px 0;
+    font-size: 30px;
+}
+
+.author-bio {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .author-avatar img {
@@ -172,90 +188,90 @@ main {
     max-height: 100px;
     width: 100px;
     height: 100px;
+    border-radius: 50px;
 }
 
 .author-contact {
-    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+    padding-top: 10px;
+    height: 100px;
+    text-align: center;
 }
 
-/* Article list */
-
-.li-h1 {
-    margin-bottom: 2px;
+.author-contact a {
+    display: inline-block;
+    padding: 7px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    color: rgba(0, 0, 0, 0.7);
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 13px;
+    transition: background-color,border-color,color 0.1s linear;
 }
 
-.li-small {
-    font-size: 70%;
-    margin-top: 3px;
-    margin-bottom: 6px;
+.author-contact a:hover {
+    border: 1px solid rgba(51, 122, 182, 1.0);
+    background-color: rgba(51, 122, 183, 1.0);
+    color: rgba(255, 255, 255, 1.0);
 }
 
-.li-content {
-    display: flex;
+/* Pagination */
+
+.pagination
+{
+	width: 100%;
+	text-align: center;
 }
 
-.li-content img {
-    width: 250px;
-    margin-left: 20px;
+.older-posts,.newer-posts
+{
+	display: inline!important;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	text-decoration: none;
+	transition: border .3s ease;
+	padding: 5px 14px;
 }
 
-.summary-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+.page-number
+{
+	display: inline-block;
+	min-width: 100px;
+	padding: 2px 0;
 }
 
-/* Tag list */
-
-#container-tags-title {
-    display: flex;
-    justify-content: space-between;
-}
-#btn-all-tags {
-    align-self: flex-end;
-    margin-bottom: 13px;
-}
-.list-group-item {
-  border-radius: 0px !important;
+.newer-posts
+{
+	float: left;
 }
 
-/* Bootstrap adjustions */
+.older-posts
+{
+    float: right;
+}
 
-h1,
-.h1 {
-  font-size: 36px;
+.older-posts:hover,.newer-posts:hover
+{
+	color: #889093;
+	border-color: #98a0a4;
 }
-h2,
-.h2 {
-  font-size: 30px;
-}
-h3,
-.h3 {
-  font-size: 24px;
-}
-h4,
-.h4 {
-  font-size: 18px;
-}
-h5,
-.h5 {
-  font-size: 14px;
-}
-h6,
-.h6 {
-  font-size: 12px;
-}
+
+/* Override some of Bootstrap's styles */
 
 pre {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 pre code {
     overflow: auto;
     white-space: pre;
     word-wrap: normal;
+}
+
+.pager li>a {
+    transition: background-color 0.1s linear;
 }
 
 blockquote {
@@ -266,121 +282,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: "Source Sans Pro", "Kozuka Gothic Pr6N", Meiryo, sans-serif !important;
 }
 
-small, .small {
-  font-size: 80%;
-}
-
-a > .btn:hover {
-  text-decoration: none;
-}
-
 article section img {
     max-width: 100%;
     height: auto;
     margin: 13px auto;
 }
 
-.btn {
-    font-size: 13px;
-    line-height: 1.58823529;
-    /*
-    XXX Specify a radius for the buttons here
-    */
-    border-radius: 0px;
-}
-
-blockquote {
-	padding: 20px;
-	margin: 15px 0px;
-	font-size: unset;
-}
-
-/*
-XXX Maybe but this in? Somethimes it's not smooth and that makes it ugly...
-.btn, .btn-primary, a.btn-default, a {
-    transition: all 0.1s linear;
-}
-*/
-
-.btn-older-posts {
-    float: left;
-}
-
-.btn-newer-posts {
-    float: right;
-}
-
-/*
-Paging at the bottom
-
-I don't use the default pager-class because I want to use the normal buttons with my style
-*/
-.pager-container {
-    overflow: auto;
-}
-
-.delimiter {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.pagination {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    border-radius: unset;
-}
-
-.info {
-    position: fixed;
-    bottom:0%;
-    width:100%;
-    padding: 10px;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-}
-
-.info-content {
-  margin: auto;
-  padding: 10px;
-}
-
-@media (min-width: 768px) {
-  .info-content {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .info-content {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .info-content {
-    width: 1170px;
-  }
-}
-
-/* Images */
-.embedded-image {
-	padding: 5px;
-}
-
-/* Note box */
-.note {
-	padding: 20px;
-	margin: 15px 0px;
-}
-
-/* Table */
-table {
-    width: 100%;
-	margin: 15px 0px;
-}
-
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
-}

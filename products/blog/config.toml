@@ -1,25 +1,14 @@
 baseurl = "https://berwout.nl/"
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = "true"
+languageCode = "en-us"
 title = "Berwouts' blog"
 
+copyright = "&copy; Berwout 2021"
+
 [params]
-    # Short subtitle/tagline. This is displayed in the header.
+    GoogleAnalyticsID = ""
+    twitter = "@berwout_dvr"
+    github = "nrg500"
+    linkedin = "berwout-de-vries-robles-4712b355"
+    author = "Berwout de Vries Robles"
+    contact = "mailto:bdvr@Live.nl"
     subtitle = "A place to organize all my thoughts"
-    # Defines the tab color in Chrome for Android.
-    themecolor = "#hexcolor"
-    # To load additional CSS styles
-    # Show this very user-friendly and absolutely not annoying GDPR notice at the bottom of the page
-    ShowGDPRNotice = true
-    # Since 0.57.0 there's the concept of "main sections". The files for the section "posts" are in "./content/posts/".
-    mainSections = ["posts"]
-
-[menu]
-
-[languages]
-    [languages.en]
-        languageCode = "en"
-        languageName = "English"
-        subtitle = "A place to organize all my thoughts"
-        # Copyright notice. This is displayer in the footer.
-        copyright = "&copy; Berwout 2021"
