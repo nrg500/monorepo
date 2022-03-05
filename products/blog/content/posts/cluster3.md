@@ -6,7 +6,6 @@ summary = "Part 3 of series describing the home cluster build. All the preparati
 tags = ["cluster"]
 +++
 
-# Building a home kubernetes cluster - One node cluster
 Now that I have a DMZ, it is time to create the cluster and to enable myself to securely expose something on that cluster. In order to securely expose services on the cluster I would like to have them behind SSL certificates. [Let's Encrypt](https://letsencrypt.org) allows us to request these certificates for free. 
 
 ## Painting a picture

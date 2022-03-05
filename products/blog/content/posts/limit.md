@@ -6,8 +6,6 @@ summary = "Dealing with uncertainty is a primary skill in Software engineering. 
 tags = ["thoughts"]
 +++
 
-# The limit of uncertainty
-
 ## Introduction
 In my bachelor's thesis five years ago I first wrote about the idea of a limit of uncertainty. The term helps me describe how tasks feel for me and imagine how they feel for others. I use it to describe the point where a person is no longer willing to work on a task. It's this feeling that a task is too large to comprehend, too much of a struggle, just too much for you at that specific time. There are all sorts of mechanical coping mechanisms we commonly use in the process of Software Engineering. Refinements are a good example. Keeping commits small and branches short lived is another. It seems to me that we rarely try to discuss the emotional part of it though. You could argue that our entire job is reducing uncertainty. Someone comes to us with a vague largely undefined solution for a problem and we explore and systematically eliminate uncertainty until we end up with a concrete implementation of the solution. I think a more holistic approach would be better and I think this idea can help.
 

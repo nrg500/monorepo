@@ -6,8 +6,6 @@ summary = "How is it that the larger companies get, the more inhumane they seem 
 tags = ["thoughts"]
 +++
 
-# The inverse ratio between social position and humaneness
-
 ## Introduction
 I was reading The Gulag Archipelago by Solzhenitsyn and encountered this phrase where he is describing the social hierarchy of guards in the Gulag as: "The inverse ratio between social position and humaneness".  The context is that according to Solzhenitsyn there is a negative selection process that occurs in the training, education and most obviously in the work of the guards. This selection process causes a situation where almost invariably the higher up the ladder a guard ends up, the less humane this guard would have to be. In other words, to be a succesful guard, you must be inhumane.
 

@@ -6,7 +6,6 @@ summary = "Part 2 of series describing the home cluster build. Before we create 
 tags = ["cluster"]
 +++
 
-# Building a home kubernetes cluster - Setting up a DMZ
 In order to serve content to the outside world I will need to open up my network to allow for HTTP/HTTPS traffic to come in.
 Normally your default home router setup will not allow any incoming network traffic into your home network so we will need to open that up a little.
 The world is a scary place and I would like to make sure that anyone coming into my network can not abuse a security flaw to hop into my home network.

@@ -6,7 +6,6 @@ summary = "Part 1 of series describing the home cluster build. Gathering the pie
 tags = ["cluster"]
 +++
 
-# Building a home kubernetes cluster - Project start
 I've decided I want to have a kubernetes cluster for home use. There are a couple of reasons for it:
 
 * I want to host some of my own applications like this blog.
