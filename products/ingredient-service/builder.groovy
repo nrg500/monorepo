@@ -5,7 +5,7 @@ def build(version) {
                 stash "ingredient-service"
             }
             def dockerBuild = load('pipeline/docker.groovy')
-            dockerBuild.buildAndUploadImage('berwoutv', "ingredient-service", version, '.')
+            dockerBuild.buildAndUploadImage('berwoutv', "ingredient-service", version, '.', true)
         }
     }
 }

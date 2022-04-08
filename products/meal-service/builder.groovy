@@ -5,7 +5,7 @@ def build(version) {
                 stash "meal-service"
             }
             def dockerBuild = load('pipeline/docker.groovy')
-            dockerBuild.buildAndUploadImage('berwoutv', "meal-service", version, '.')
+            dockerBuild.buildAndUploadImage('berwoutv', "meal-service", version, '.', true)
         }
     }
 }

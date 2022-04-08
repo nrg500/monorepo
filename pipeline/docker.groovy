@@ -1,7 +1,9 @@
-def buildAndUploadImage(registry, product, version, buildFolder) {
+def buildAndUploadImage(registry, product, version, buildFolder, hasStashedFiles) {
     dir("products/${product}") {
         def imageName = "${registry}/${product}:${version}"
-        unstash "${product}"
+        if(hasStashedFiles) {
+            unstash "${product}"
+        }
         def dockerImage = docker.build(imageName, buildFolder)
         docker.withRegistry('', 'dockerhub') {
             dockerImage.push()
