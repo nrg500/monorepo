@@ -4,8 +4,10 @@
     <mat-icon>camera_alt</mat-icon>
   </button>
 
-  <img [src]="webcamImage?.imageAsDataUrl"/>
+  <img id="image" [src]="webcamImage?.imageAsDataUrl" (load)="convertToOpenCV()"/>
 </div>
+
+<canvas id="canvas"></canvas>
 
 
 <router-outlet></router-outlet>

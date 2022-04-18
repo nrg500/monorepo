@@ -9,7 +9,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {WebcamModule} from "ngx-webcam";
+import { NgxOpenCVModule, OpenCVConfig } from 'ngx-opencv';
 
+const openCVConfig: OpenCVConfig = {
+  openCVDirPath: 'assets/opencv'
+};
 @NgModule({
   declarations: [
     AppComponent
@@ -26,7 +30,8 @@ import {WebcamModule} from "ngx-webcam";
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
-    WebcamModule
+    WebcamModule,
+    NgxOpenCVModule.forRoot(openCVConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
