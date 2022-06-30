@@ -1,13 +1,11 @@
 <div>
-  <webcam (imageCapture)="handleImage($event)" [trigger]="triggerObservable"></webcam>
-  <button mat-fab color="primary" aria-label="Take a picture icon" (click)="triggerSnapshot()">
-    <mat-icon>camera_alt</mat-icon>
-  </button>
+  <webcam (imageCapture)="handleImage($event)" style="margin-left: 200px;" [trigger]="triggerObservable" style="display:none"></webcam>
 
-  <img id="image" [src]="webcamImage?.imageAsDataUrl" (load)="convertToOpenCV()"/>
+  <img id="image" [src]="webcamImage?.imageAsDataUrl" style="margin-left: 50px;" (load)="convertToOpenCV()" style="display:none"/>
 </div>
 
-<canvas id="canvas"></canvas>
+<canvas id="canvas-filter2d" style="margin-left: 50px; width: auto; height: auto;"></canvas>
+<canvas id="canvas-dilate" style="margin-left: 200px; width: auto; height: auto;"></canvas>
+<canvas id="canvas-threshold" style="margin-left: 50px; width: auto; height: auto;"></canvas>
+<canvas id="canvas" style="margin-left: 200px; width: auto; height: auto;"></canvas>
 
-
-<router-outlet></router-outlet>
