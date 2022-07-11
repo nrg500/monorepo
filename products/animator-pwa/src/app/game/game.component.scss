@@ -1,0 +1,17 @@
+@font-face {
+  font-family: daniel;
+  src: url("../../assets/fonts/daniel/Daniel-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: daniel;
+  font-weight: bold;
+  src: url("../../assets/fonts/daniel/Daniel-Bold.otf") format("opentype");
+}
+
+.game-container {
+  background: black;
+  color: whitesmoke;
+  width: 100%;
+  height: 100%;
+}
+

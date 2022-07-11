@@ -1,0 +1,4 @@
+<button mat-fab color="primary" class="mute-button">
+  <mat-icon *ngIf="!muted" (click)="toggleMute()">volume_mute</mat-icon>
+  <mat-icon *ngIf="muted" (click)="toggleMute()">volume_off</mat-icon>
+</button>

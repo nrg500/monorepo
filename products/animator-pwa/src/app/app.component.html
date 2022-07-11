@@ -1,3 +1,5 @@
+<!--<router-outlet></router-outlet>-->
+
 <div>
   <webcam (imageCapture)="handleImage($event)" style="margin-left: 200px;" [trigger]="triggerObservable" style="display:none"></webcam>
 
@@ -5,7 +7,9 @@
 </div>
 
 <canvas id="canvas-filter2d" style="margin-left: 50px; width: auto; height: auto;"></canvas>
-<canvas id="canvas-dilate" style="margin-left: 200px; width: auto; height: auto;"></canvas>
+<canvas id="canvas-dilate" style="margin-left: 50px; width: auto; height: auto;"></canvas>
 <canvas id="canvas-threshold" style="margin-left: 50px; width: auto; height: auto;"></canvas>
-<canvas id="canvas" style="margin-left: 200px; width: auto; height: auto;"></canvas>
+<canvas id="canvas" style="margin-left: 50px; width: auto; height: auto;"></canvas>
+<canvas id="drawing" style="display:block"></canvas>
+<canvas id="animation" style="display:block; margin-top:50px; margin-left:200px"></canvas>
 
