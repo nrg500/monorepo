@@ -1,36 +1,22 @@
-.top-row {
-  height: 30%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
+
 
 .middle-row {
+  margin-top: 10%;
   height: 30%;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .bottom-row {
-  height: 10%;
+  height: 15%;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
-}
-
-.spacer {
-  width:10%;
-}
-
-.spacer-wide {
-  width:40%;
 }
 
 .center-piece {
@@ -54,14 +40,14 @@
 
 .start-button {
   width: 100%;
-  height: 50%;
+  height: 60%;
   font-family: daniel;
   border: 0.1em solid whitesmoke;
   background: black;
   color: whitesmoke;
   border-radius: 1em;
-  font-size: 3em;
-  line-height: 50%;
+  font-size: 3rem;
+  line-height: 180%;
   font-weight: bold;
   text-decoration: underline;
 }

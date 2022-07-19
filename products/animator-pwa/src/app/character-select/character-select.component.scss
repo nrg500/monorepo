@@ -1,0 +1,95 @@
+.text-input {
+  color: white;
+  caret-color: whitesmoke;
+  font-family: daniel;
+  font-size: 2em;
+  font-weight: bold;
+  height: 3rem;
+}
+
+.text-label {
+  color: whitesmoke;
+  font-size: 1.5em;
+}
+
+.form-field {
+  color: whitesmoke;
+  width: 100%;
+}
+
+.character-select-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.character-table {
+  background-color: rgba(211,211,211, 0.1);
+  padding: 2em;
+  border-radius: 1em;
+  width: 35%;
+}
+
+:host::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: whitesmoke !important;
+}
+
+:host::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: whitesmoke !important;
+}
+
+:host::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: whitesmoke !important;
+}
+
+canvas {
+  width: 64px;
+  height: 64px;
+  border: 1px solid whitesmoke;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.animation {
+  vertical-align: middle;
+  font-size: 1.5em;
+}
+
+.title{
+  h1 {
+    font-family: daniel;
+    font-size: 5em;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3%
+}
+
+
+.character-select-screen-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 10%;
+  padding-top: 3%;
+  overflow: clip;
+  button {
+    float: right;
+  }
+}
+
+.mat-raised-button.mat-primary.mat-button-disabled {
+  background-color: lightgray;
+}
+
+.start-button{
+  height: auto;
+  align-self: center;
+}

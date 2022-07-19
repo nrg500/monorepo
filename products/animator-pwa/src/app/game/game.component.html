@@ -1,4 +1,15 @@
-<rain></rain>
 <div class="game-container">
-  <main-menu></main-menu>
+  <rain></rain>
+  <div [className]="(currentState === GameState.MAIN_MENU) ? 'top-row jc-end' : 'top-row jc-space-between'">
+    <button (click)="revertToPrevious()"[hidden]="currentState === GameState.MAIN_MENU" mat-fab class="fab">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <mute-button></mute-button>
+  </div>
+  <div class="screen-container" [ngSwitch]="currentState">
+    <main-menu *ngSwitchCase="GameState.MAIN_MENU" (startButtonClicked)="setGameState(GameState.CHARACTER_SELECT)"></main-menu>
+    <character-select *ngSwitchCase="GameState.CHARACTER_SELECT"></character-select>
+    <character-load *ngSwitchCase="GameState.LOADING_CHARACTER"></character-load>
+  </div>
+
 </div>

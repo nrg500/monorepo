@@ -16,6 +16,9 @@ import {MatCardModule} from "@angular/material/card";
 import { RainComponent } from './rain/rain.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MuteButtonComponent } from './mute-button/mute-button.component';
+import { CharacterSelectComponent } from './character-select/character-select.component';
+import {MatInputModule} from "@angular/material/input";
+import { CharacterLoadComponent } from './character-load/character-load.component';
 
 const openCVConfig: OpenCVConfig = {
   openCVDirPath: 'assets/opencv'
@@ -26,7 +29,9 @@ const openCVConfig: OpenCVConfig = {
     GameComponent,
     RainComponent,
     MainMenuComponent,
-    MuteButtonComponent
+    MuteButtonComponent,
+    CharacterSelectComponent,
+    CharacterLoadComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ const openCVConfig: OpenCVConfig = {
     WebcamModule,
     NgxOpenCVModule.forRoot(openCVConfig),
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

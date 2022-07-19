@@ -10,3 +10,17 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.fab {
+  background-color:black!important;
+  min-height: 8rem !important;
+  min-width: 8rem !important;
+}
+
+.fab mat-icon {
+  transform: scale(2.5);
+}
+
+[hidden] {
+  display: none !important;
+}

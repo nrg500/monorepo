@@ -1,0 +1,126 @@
+<div class="character-select-screen-container">
+  <div class="title">
+    <h1>
+      Character select
+    </h1>
+  </div>
+  <div class="character-select-container">
+    <table class="character-table">
+      <tr>
+        <td colspan="3">
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Name:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <td colspan="3">
+        <h2>Animations</h2>
+      </td>
+      <tr>
+        <td class="animation">Idle: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td class="animation">Run: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td class="animation">Jump: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td class="animation">Attack: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <button mat-raised-button color="primary" (click)="loadCharacter()"><mat-icon>photo_camera</mat-icon> Load character</button>
+        </td>
+      </tr>
+    </table>
+    <button mat-raised-button color="primary" class="start-button" [disabled]="!bothCharactersSelected"><mat-icon>games</mat-icon> Fight!</button>
+    <table class="character-table">
+      <tr>
+        <td colspan="3">
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Name:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <td colspan="3">
+        <h2>Animations</h2>
+      </td>
+      <tr>
+        <td class="animation">Idle: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td class="animation">Run: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td class="animation">Jump: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td class="animation">Attack: </td>
+        <td><canvas></canvas></td>
+        <td>
+          <mat-form-field class="form-field">
+            <mat-label class="text-label">Frames:</mat-label>
+            <input matInput class="text-input">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <button mat-raised-button color="primary"><mat-icon>photo_camera</mat-icon> Load character</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
