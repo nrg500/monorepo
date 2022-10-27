@@ -12,7 +12,7 @@ googleAnalytics = ""
   # Use custom.css for your custom styling
   style = "green"
   description = "My art portfolio"
-  copyright = "&copy;2021 Liza Genke"
+  copyright = "&copy;2022 Liza Genke"
   sidebarAbout = [
     "Hi, welcome to my portfolio. My name is Liza and I like to draw in my free time",
     "Originally from Siberia, currently based in The Netherlands."
@@ -52,7 +52,7 @@ googleAnalytics = ""
 
   [params.social]
   facebook      = "https://www.facebook.com/liza.genke"
-  email         = "liza.genke@gmail.com"
+  email         = "lizagenke@gmail.com"
   twitter       = "https://twitter.com/GenkeLiza"
   linkedin      = "https://www.linkedin.com/in/elizaveta-genke/"
   instagram     = "https://instagram.com/lizagenke"
