@@ -4,5 +4,5 @@ title = "Fruits"
 draft = false
 image = "img/portfolio/Fruits.jpeg"
 showonlyimage = true
-weight = 1
+weight = 7
 +++

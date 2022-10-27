@@ -4,5 +4,5 @@ title = "Bob Ross"
 draft = false
 image = "img/portfolio/BobRoss.jpg"
 showonlyimage = true
-weight = 0
+weight = 5
 +++

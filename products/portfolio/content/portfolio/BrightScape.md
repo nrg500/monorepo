@@ -4,5 +4,5 @@ title = "Bright Landscape"
 draft = false
 image = "img/portfolio/BrightScape.jpg"
 showonlyimage = true
-weight = 1
+weight = 2
 +++
