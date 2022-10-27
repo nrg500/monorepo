@@ -1,8 +1,0 @@
-+++
-date = "2021-12-4T13:41:01+05:30"
-title = "Friesland"
-draft = false
-image = "img/portfolio/Friesland.jpg"
-showonlyimage = true
-weight = 1
-+++
