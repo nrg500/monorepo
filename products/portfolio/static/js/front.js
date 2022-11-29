@@ -151,6 +151,7 @@ $.fn.alignElementsSameHeight = function () {
     });
 }
 $(window).load(function () {
+    masonry();
     windowWidth = $(window).width();
     $(this).alignElementsSameHeight();
 });
