@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="col-xs-8 col-sm-9 col-md-10">
+<h1>Star polygons</h1>
+<p>A star polygon is a geometrical figure formed by connecting equally spaced points on a circumference (p) with straight lines skipping every q-1 points. 
+    A common notation for star polygons is called Schläffi notation and it looks like {p/q}. 
+    It is assumed that p and q are coprime, meaning the only common divisor they have is 1. 
+    Yet it is possible to construct a star with p and q not being coprime numbers, the star polygon like this would be then called degenerate star polygon.
+To construct a degenerate star polygon start with any point and with each q-th point. 
+When the initial point is reached, choose the next unconnected point and repeat the procedure.
+The degenerate star polygon consists of q unconnected p/q polygons.
+A curious property of star polygons: a star polygon of {p/q} looks exactly like a star polygon {p/p-q}.
+Try playing with constructing different star polygons with the interactive plot below!
+Regular star polygons are plotted in black color and degenerate star polygons are plotted with blue color.</p>
+
+
+<div class="slidecontainer" width = 10%>
+    <input type="range" min="3" max="21" value="7" class="slider" id="starSize">
+    <p>Number of vertices: <span id="starSizeOutput"></span></p>
+</div>
+<div class="slidecontainer">
+    <input type="range" min="1" max="6" value="1" class="slider" id="starStep">
+    <p>Density: <span id="starStepOutput"></span></p>
+</div>
+<br/>
+
+<script src="/js/stars.js"></script>
+<div id="graph" style="width:600px;height:600px;"></div>
+</div>
+{{ end }}
