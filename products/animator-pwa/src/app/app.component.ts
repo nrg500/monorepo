@@ -31,27 +31,27 @@ export class AppComponent {
 
   constructor(private ngxOpenCv: NgxOpenCVService, private httpClient: HttpClient) {
     this.trigger = new Subject<void>();
-    // this.httpClient.get('assets/originalImage.txt', {responseType: 'text'})
-    // .subscribe(data => {
-    //     let berMat = JSON.parse(data) as BerMat;
-    //     berMat.data = Object.keys(berMat.data).map(key => berMat.data[key as any]);
-    //     this.preImage = berMat;
-    // });
-    // this.ngxOpenCv.cvState.subscribe(
-    //   (cvState: OpenCVState) => {
-    //     this.cvState = cvState.state;
-    //     if (cvState.error) {
-    //       console.log("ERROR");
-    //     } else if (cvState.loading) {
-    //       console.log("LOADING");
-    //     } else if (cvState.ready) {
-    //       console.log("READY");
-    //       this.cv = cv.__zone_symbol__value
-    //       // do image processing stuff
-    //       this.interval = setInterval(() => this.trigger.next(), 50);
-    //     }
-    //   }
-    // );
+    this.httpClient.get('assets/originalImage2.txt', {responseType: 'text'})
+    .subscribe(data => {
+        let berMat = JSON.parse(data) as BerMat;
+        berMat.data = Object.keys(berMat.data).map(key => berMat.data[key as any]);
+        this.preImage = berMat;
+    });
+    this.ngxOpenCv.cvState.subscribe(
+      (cvState: OpenCVState) => {
+        this.cvState = cvState.state;
+        if (cvState.error) {
+          console.log("ERROR");
+        } else if (cvState.loading) {
+          console.log("LOADING");
+        } else if (cvState.ready) {
+          console.log("READY");
+          this.cv = cv.__zone_symbol__value
+          // do image processing stuff
+          this.interval = setInterval(() => this.trigger.next(), 50);
+        }
+      }
+    );
   }
 
   handleImage($event: WebcamImage): void {
@@ -62,7 +62,7 @@ export class AppComponent {
     const cv = this.cv;
     let src;
     if(this.preImage) {
-      clearInterval(this.interval);
+      clearInterval(this.interval!);
       src =  cv.matFromArray(this.preImage.rows, this.preImage.cols, this.preImage.type, this.preImage.data);
     } else {
       src = cv.imread('image');
@@ -145,7 +145,7 @@ export class AppComponent {
       });
 
       if(realSquares.length > 11) {
-        clearInterval(this.interval);
+        clearInterval(this.interval!);
         this.drawSquares(src, realSquares);
       }
     }
