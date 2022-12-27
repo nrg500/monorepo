@@ -1,5 +1,5 @@
 <div class="game-container">
-  <rain></rain>
+  <!-- <rain></rain> -->
   <div [className]="(currentState === GameState.MAIN_MENU) ? 'top-row jc-end' : 'top-row jc-space-between'">
     <button (click)="revertToPrevious()"[hidden]="currentState === GameState.MAIN_MENU" mat-fab class="fab">
       <mat-icon>keyboard_arrow_left</mat-icon>

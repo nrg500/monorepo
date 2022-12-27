@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GameState} from "./GameState";
-import {GameService} from "../game.service";
-import {Subscription} from "rxjs";
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from "rxjs";
+import { GameService } from './game.service';
+import { GameState } from './gamestate';
 
 @Component({
   selector: 'game',
@@ -14,12 +14,10 @@ export class GameComponent implements OnDestroy {
   currentState?: GameState;
   gameStateSubscription: Subscription;
 
-
   constructor(private gameService: GameService) {
     this.currentState = this.gameService.currentState;
     this.gameStateSubscription = this.gameService.stateChangedEmitter.subscribe(value => {
       this.currentState = value;
-      console.log(`received: ${this.currentState}`);
     });
   }
 

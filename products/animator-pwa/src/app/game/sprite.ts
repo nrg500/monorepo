@@ -1,18 +1,21 @@
 import { Point } from "../square";
+import { Animations } from "./gamestate";
 
 export class Sprite {
     spriteDimensions: Point;
-    imageData: ImageData[];
+    imageBitmaps: ImageBitmap[];
+    animations: Map<Animations, BerAnimation> = new Map();
 
-    constructor(spriteDimensions: Point, imageData: ImageData[], animations: BerAnimation[]) {
+    constructor(spriteDimensions: Point, imageBitmaps: ImageBitmap[]) {
         this.spriteDimensions = spriteDimensions;
-        this.imageData = imageData;
+        this.imageBitmaps = imageBitmaps;
     }
 }
 
 export class BerAnimation {
     direction: AnimationDirection;
     frames: number[];
+    currentFrame = 0;
 
     constructor(direction: AnimationDirection, frames: number[]) {
         this.direction = direction;
@@ -20,7 +23,7 @@ export class BerAnimation {
     }
 }
 
-enum AnimationDirection {
+export enum AnimationDirection {
     FORWARD = 1,
     BACKWARD
 }

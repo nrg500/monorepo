@@ -19,6 +19,7 @@ import { MuteButtonComponent } from './mute-button/mute-button.component';
 import { CharacterSelectComponent } from './character-select/character-select.component';
 import {MatInputModule} from "@angular/material/input";
 import { CharacterLoadComponent } from './character-load/character-load.component';
+import { FormsModule } from '@angular/forms';
 
 const openCVConfig: OpenCVConfig = {
   openCVDirPath: 'assets/opencv'
@@ -43,6 +44,7 @@ const openCVConfig: OpenCVConfig = {
       registrationStrategy: 'registerWhenStable:30000'
     }),
     BrowserAnimationsModule,
+    FormsModule,
     MatIconModule,
     MatButtonModule,
     WebcamModule,

@@ -10,7 +10,7 @@
         <td colspan="3">
           <mat-form-field class="form-field">
             <mat-label class="text-label">Name:</mat-label>
-            <input matInput class="text-input">
+            <input matInput [ngModel]="player1idle" (ngModelChange)="parseAnimation($event, Player.PLAYER1, Animations.IDLE)" #ctrl="ngModel" class="text-input">
           </mat-form-field>
         </td>
       </tr>
@@ -59,7 +59,7 @@
       </tr>
       <tr>
         <td colspan="3">
-          <button mat-raised-button color="primary" (click)="loadCharacter(1)"><mat-icon>photo_camera</mat-icon> Load character</button>
+          <button mat-raised-button color="primary" (click)="loadCharacter(Player.PLAYER1)"><mat-icon>photo_camera</mat-icon> Load character</button>
         </td>
       </tr>
     </table>
@@ -118,7 +118,7 @@
       </tr>
       <tr>
         <td colspan="3">
-          <button mat-raised-button color="primary" (click)="loadCharacter(2)"><mat-icon>photo_camera</mat-icon> Load character</button>
+          <button mat-raised-button color="primary" (click)="loadCharacter(Player.PLAYER2)"><mat-icon>photo_camera</mat-icon> Load character</button>
         </td>
       </tr>
     </table>

@@ -1,7 +1,7 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {GameState} from "./game/GameState";
-import { Sprite } from './game/sprite';
-import { Point } from './square';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Point } from '../square';
+import { GameState, Player } from './gamestate';
+import { Sprite } from './sprite';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class GameService {
   stateChangedEmitter: EventEmitter<GameState> = new EventEmitter<GameState>();
   player1?: Sprite;
   player2?: Sprite;
-  selectingCharacter = 1;
-  playerSaved: EventEmitter<number> = new EventEmitter<number>();
+  selectingCharacter: Player = Player.PLAYER1;
+  playerSaved: EventEmitter<Player> = new EventEmitter<Player>();
 
   constructor() {
     this.previousStates.push(this.currentState);
@@ -27,20 +27,31 @@ export class GameService {
   }
 
   revertToPrevious() {
-    if(this.previousStates.size() > 0) {
+    if (this.previousStates.size() > 0) {
       this.currentState = this.previousStates.pop()!;
       this.stateChangedEmitter.emit(this.currentState);
     }
   }
 
-  savePlayer(playerDimensions: Point,  imageData: ImageData[]) {
-    const sprite = new Sprite(playerDimensions, imageData, []);
-    if(this.selectingCharacter == 1) {
+  savePlayer(playerDimensions: Point, imageBitmaps: ImageBitmap[]) {
+    const sprite = new Sprite(playerDimensions, imageBitmaps);
+    if (this.selectingCharacter === Player.PLAYER1) {
       this.player1 = sprite;
     } else {
       this.player2 = sprite;
     }
     this.playerSaved.emit(this.selectingCharacter);
+  }
+
+  getPlayer(player: Player) {
+    switch (player) {
+      case Player.PLAYER1:
+        return this.player1;
+      case Player.PLAYER2:
+        return this.player2;
+      default:
+        return undefined;
+    }
   }
 }
 
@@ -54,7 +65,7 @@ interface IStack<T> {
 class Stack<T> implements IStack<T> {
   private storage: T[] = [];
 
-  constructor(private capacity: number = Infinity) {}
+  constructor(private capacity: number = Infinity) { }
 
   push(item: T): void {
     if (this.size() === this.capacity) {
