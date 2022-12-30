@@ -10,7 +10,7 @@
         <td colspan="3">
           <mat-form-field class="form-field">
             <mat-label class="text-label">Name:</mat-label>
-            <input matInput [ngModel]="player1idle" (ngModelChange)="parseAnimation($event, Player.PLAYER1, Animations.IDLE)" #ctrl="ngModel" class="text-input">
+            <input matInput class="text-input">
           </mat-form-field>
         </td>
       </tr>
@@ -19,41 +19,41 @@
       </td>
       <tr>
         <td class="animation">Idle: </td>
-        <td><canvas id="player1animation1" width="100" height="100"></canvas></td>
+        <td><canvas id="PLAYER1.IDLE" width="100" height="100"></canvas></td>
         <td>
           <mat-form-field class="form-field">
             <mat-label class="text-label">Frames:</mat-label>
-            <input matInput class="text-input">
+            <input matInput [ngModel]="player1idle" (ngModelChange)="parseAnimation($event, 0, 0)" class="text-input">
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td class="animation">Run: </td>
-        <td><canvas width="100" height="100"></canvas></td>
+        <td><canvas id="PLAYER1.RUN" width="100" height="100"></canvas></td>
         <td>
           <mat-form-field class="form-field">
             <mat-label class="text-label">Frames:</mat-label>
-            <input matInput class="text-input">
+            <input matInput [ngModel]="player1run" (ngModelChange)="parseAnimation($event, 0, 1)" class="text-input">
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td class="animation">Jump: </td>
-        <td><canvas width="100" height="100"></canvas></td>
+        <td><canvas id="PLAYER1.JUMP" width="100" height="100"></canvas></td>
         <td>
           <mat-form-field class="form-field">
             <mat-label class="text-label">Frames:</mat-label>
-            <input matInput class="text-input">
+            <input matInput [ngModel]="player1jump" (ngModelChange)="parseAnimation($event, 0, 2)" class="text-input">
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td class="animation">Attack: </td>
-        <td><canvas width="100" height="100"></canvas></td>
+        <td><canvas id="PLAYER1.ATTACK" width="100" height="100"></canvas></td>
         <td>
           <mat-form-field class="form-field">
             <mat-label class="text-label">Frames:</mat-label>
-            <input matInput class="text-input">
+            <input matInput [ngModel]="player1attack" (ngModelChange)="parseAnimation($event, 0, 3)" class="text-input">
           </mat-form-field>
         </td>
       </tr>

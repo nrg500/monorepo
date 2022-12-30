@@ -205,15 +205,24 @@ export class CharacterLoadComponent implements OnInit {
 
     let canvas = document.getElementById("drawing") as HTMLCanvasElement;
     let ctx = canvas.getContext("2d")!;
+    let bitmaps: Map<number, ImageBitmap> = new Map();
     let bitmapPromises: Promise<ImageBitmap>[] = [];
-    for (let i = 0; i < this.expectedWidth; i++) {
       for (let j = 0; j < this.expectedHeight; j++) {
-        bitmapPromises.push(createImageBitmap(ctx.getImageData((j * this.expectedWidth + i) * squares[0].length, 0, squares[0].length, squares[0].length)));
+        for (let i = 0; i < this.expectedWidth; i++) {
+        const promise = createImageBitmap(ctx.getImageData((i * this.expectedHeight + j) * squares[0].length, 0, squares[0].length, squares[0].length));
+        bitmapPromises.push(promise);
+        promise.then(
+          bitmap => bitmaps.set(j * this.expectedWidth + i, bitmap)
+        );
       }
     }
 
-    Promise.all(bitmapPromises).then(bitmaps => {
-      this.gameService.savePlayer(new Point(this.expectedWidth, this.expectedHeight), bitmaps);
+    Promise.all(bitmapPromises).then(_ => {
+      const bitmapsInOrder = [];
+      for (let i = 0; i < this.expectedHeight * this.expectedWidth; i++) {
+        bitmapsInOrder.push(bitmaps.get(i)!);
+      }
+      this.gameService.savePlayer(new Point(this.expectedWidth, this.expectedHeight), bitmapsInOrder);
       this.gameService.setGameState(GameState.CHARACTER_SELECT);
     })
     // for(let i=0; i<4; i++) {
